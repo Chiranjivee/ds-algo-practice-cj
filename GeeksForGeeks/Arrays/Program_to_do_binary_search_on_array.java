@@ -21,14 +21,11 @@ class Solution {
             return -1;
         }
 
-        int mid = ( start + end ) / 2;
+        int mid = (start + end) / 2;
         if (array[mid] == key) {
             return mid;
         }
 
-        return 
-            array[mid] >= key ? 
-                binarySearch(array, start, mid, key):
-                binarySearch(array, mid + 1, end, key);
+        return (array[mid] >= key) ? binarySearch(array, start, mid, key) : binarySearch(array, mid + 1, end, key);       
     }
 }
