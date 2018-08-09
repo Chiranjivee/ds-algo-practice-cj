@@ -1,5 +1,10 @@
 class Solution {
 
+
+    public static void main(String[] args) {
+       System.out.println(lengthOfLongestSubstring("ABCAAD");
+    }
+
     public int lengthOfLongestSubstring(String s) {
         int ans = 0;
         HashMap<Character, Integer> map = new HashMap<>();
