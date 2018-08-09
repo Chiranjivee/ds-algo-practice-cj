@@ -7,4 +7,5 @@ This repository will be used for practising different question from various reso
 * Elements of Programming interview
 * Data structures and algorithms made easy in Java
 * LeetCode
+    * Program to find all unique char substring.
 * CodeRust Interview Preparation.
