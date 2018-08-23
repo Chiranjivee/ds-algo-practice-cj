@@ -9,3 +9,4 @@ This repository will be used for practising different question from various reso
 * LeetCode
     * Program to find all unique char substring.
 * CodeRust Interview Preparation.
+* Project Euler
