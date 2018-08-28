@@ -7,6 +7,7 @@ class SegmentTree {
     }
 
     public void printSegmentTree() {
+        System.out.println("Printing segment Tree:");
         for (int i = 0; i < this.segmentTree.length; i++) {
             System.out.print(this.segmentTree[i] + ", ");
         }
@@ -57,21 +58,57 @@ class SegmentTree {
             return segmentTree[node];
         }
 
-        
-
         int mid = segmentStart + (segmentEnd - segmentStart) / 2;
         return 
             getSumInRangeUtil(segmentTree, segmentStart, mid, rs, re, node * 2 + 1) + 
             getSumInRangeUtil(segmentTree, mid + 1, segmentEnd, rs, re, node * 2 + 2);
     }
 
+    public void updateArray(int [] arr, int index, int value) {
+        if (index < 0 || index >= arr.length) {
+            System.out.println("Invalid input");
+        }
+
+        int sumDiff = value - arr[index];
+        arr[index] = value;
+        updateSegmentTreeUtil(index, sumDiff, 0, arr.length - 1, 0);
+    }
+
+    public void updateSegmentTreeUtil(int index, int sumDiff, int segmentStart, int segmentEnd, int node) {
+        // if index falls in current segment update node by node + sum Dif
+        if (index < segmentStart || index > segmentEnd) {
+            return;
+        }
+
+        segmentTree[node] += sumDiff;
+        if (segmentStart != segmentEnd) {
+            int mid = segmentStart + (segmentEnd - segmentStart) / 2;
+            updateSegmentTreeUtil(index, sumDiff, segmentStart, mid, node * 2 + 1);
+            updateSegmentTreeUtil(index, sumDiff, mid + 1, segmentEnd, node * 2 + 2);
+        }
+    }
+
     public static void main(String[] args) {
         int [] arr = {1, 2, 3, 4, 5, 6};
         int n = arr.length;
         SegmentTree segTree = new SegmentTree(arr, n);
+        printArray(arr);
         
         segTree.printSegmentTree();
         System.out.println();
         System.out.println(segTree.getSumInRange(0, 5, 6));
+
+        segTree.updateArray(arr, 4, 90);
+        printArray(arr);
+        segTree.printSegmentTree();
+
+
+    }
+
+    public static void printArray(int [] arr) {
+        System.out.println("Printin array");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + ", ");
+        }
     }
 }
