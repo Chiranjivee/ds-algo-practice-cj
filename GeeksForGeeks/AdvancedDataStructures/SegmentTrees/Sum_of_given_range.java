@@ -7,45 +7,40 @@ class SegmentTree {
     }
 
     public void printSegmentTree() {
-        System.out.println("Printing segment Tree:");
+        System.out.println("\nPrinting segment Tree:");
         for (int i = 0; i < this.segmentTree.length; i++) {
             System.out.print(this.segmentTree[i] + ", ");
         }
     }
 
-    public int constructSegmentTree(int arr[], int ss, int se, int n) {
-        if (ss == se) {
-            segmentTree[n] = arr[ss];
-            return arr[ss];
+    public int constructSegmentTree(
+        int arr[], 
+        int segmentStart, 
+        int segmentEnd, 
+        int nodeIndex) 
+    {
+        if (segmentStart == segmentEnd) {
+            segmentTree[nodeIndex] = arr[segmentStart];
+            return arr[segmentStart];
         }
-        int mid = (ss + se) / 2;
-        int leftMin = constructSegmentTree(arr, ss, mid, n * 2 + 1);
-        int rightMin = constructSegmentTree(arr, mid + 1, se, n * 2 + 2);
+        int mid = (segmentStart + segmentEnd) / 2;
+        int leftMin = constructSegmentTree(arr, segmentStart, mid, nodeIndex * 2 + 1);
+        int rightMin = constructSegmentTree(arr, mid + 1, segmentEnd, nodeIndex * 2 + 2);
 
-        segmentTree[n] = leftMin + rightMin;
-        return segmentTree[n];
+        segmentTree[nodeIndex] = leftMin + rightMin;
+        return segmentTree[nodeIndex];
     }
 
-    public int getSumInRange(int rs, int re, int n) {
-        if (rs < 0 || re > n || rs > re) {
+    public int getSumInRange(int rangeStart, int rangeEnd, int n) {
+        if (rangeStart < 0 || rangeEnd > n || rangeStart > rangeEnd) {
             System.out.println("Invalid input");
             return -1;
         }
 
-        return getSumInRangeUtil(
-            this.segmentTree,
-            0, n - 1, rs, re, 0);
+        return getSumInRangeUtil(this.segmentTree, 0, n - 1, rangeStart, rangeEnd, 0);
     }
 
-    public int getSumInRangeUtil(
-        int [] segmentTree, 
-        int segmentStart, 
-        int segmentEnd, 
-        int rs, 
-        int re,
-        int node) 
-    {
-        System.out.println("rs: " + rs + ", re: " + re + ", segSt: " + segmentStart + ", segEnd: " + segmentEnd + ", node: " + node);
+    public int getSumInRangeUtil(int [] segmentTree, int segmentStart, int segmentEnd, int rs, int re, int node) {
         if (rs == segmentStart && re == segmentEnd) {
             return segmentTree[node];
         }
@@ -101,8 +96,6 @@ class SegmentTree {
         segTree.updateArray(arr, 4, 90);
         printArray(arr);
         segTree.printSegmentTree();
-
-
     }
 
     public static void printArray(int [] arr) {
