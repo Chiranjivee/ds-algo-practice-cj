@@ -26,7 +26,7 @@ class SegmentTree {
     }
 
     public int getSumInRange(int rs, int re, int n) {
-        if (rs < 0 || re > n || re > rs) {
+        if (rs < 0 || re > n || rs > re) {
             System.out.println("Invalid input");
             return -1;
         }
@@ -44,13 +44,20 @@ class SegmentTree {
         int re,
         int node) 
     {
-        if (rs >= segmentStart && re <= segmentEnd) {
+        System.out.println("rs: " + rs + ", re: " + re + ", segSt: " + segmentStart + ", segEnd: " + segmentEnd + ", node: " + node);
+        if (rs == segmentStart && re == segmentEnd) {
             return segmentTree[node];
         }
 
         if (segmentEnd < rs || re < segmentStart) {
             return 0;
         }
+
+        if (segmentStart == segmentEnd) {
+            return segmentTree[node];
+        }
+
+        
 
         int mid = segmentStart + (segmentEnd - segmentStart) / 2;
         return 
@@ -62,7 +69,9 @@ class SegmentTree {
         int [] arr = {1, 2, 3, 4, 5, 6};
         int n = arr.length;
         SegmentTree segTree = new SegmentTree(arr, n);
-        // segTree.getSumInRange(0, 5, 0);
+        
         segTree.printSegmentTree();
+        System.out.println();
+        System.out.println(segTree.getSumInRange(0, 5, 6));
     }
 }
