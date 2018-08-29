@@ -1,7 +1,7 @@
 class SegmentTree {
     int segmentTree[];
 
-    SegmentTree(int [] arr, int n) {
+    public SegmentTree(int [] arr, int n) {
         this.segmentTree = new int [n * 2 + 1];
         constructSegmentTree(arr, 0, n - 1, 0);
     }
@@ -70,7 +70,6 @@ class SegmentTree {
     }
 
     public void updateSegmentTreeUtil(int index, int sumDiff, int segmentStart, int segmentEnd, int node) {
-        // if index falls in current segment update node by node + sum Dif
         if (index < segmentStart || index > segmentEnd) {
             return;
         }
