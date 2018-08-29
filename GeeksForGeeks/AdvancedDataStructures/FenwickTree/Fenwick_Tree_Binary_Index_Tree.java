@@ -24,10 +24,10 @@ class BinaryIndexTree {
         int sum = 0;
         index = index + 1;
 
-        while(index>0)
-        {
+        while(index > 0) {
             sum += tree[index];
-            index -= index & (-index);
+            index = getPrevElement(index);
+            // 5 , 101 & 010
         }
         return sum;
     }
@@ -36,8 +36,23 @@ class BinaryIndexTree {
         index = index + 1;
         while (index <= arrLength) {
             tree[index] += element;
-            index += index & (-index);
+            index = getNextElement(index);
         }
+    }
+
+    public int getNextElement(int index) {
+        return index + (index & (-index));
+    }
+
+    public int getPrevElement(int index) {
+        return index - (index & (-index));
+    }
+
+    public int getSumInRange(int start, int end) {
+        if (start < 0) return -1;
+        if (end >= treeSize) return -1;
+
+        return getSum(end) - getSum(start - 1);
     }
 
     public void printFenwickTree() {
@@ -52,6 +67,7 @@ class BinaryIndexTree {
         BinaryIndexTree fenwick = new BinaryIndexTree(arr);
         fenwick.constructBIT(arr);
         fenwick.printFenwickTree();
-        System.out.println("Sum from 0 to 3: " + fenwick.getSum(5));
+        System.out.println("Sum from 0 to 3: " + fenwick.getSum(3));
+        System.out.println("Sum from 0 to 3: " + fenwick.getSumInRange(0, 3));
     }
 }
