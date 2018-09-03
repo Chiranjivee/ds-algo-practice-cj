@@ -10,3 +10,4 @@ This repository will be used for practising different question from various reso
     * Program to find all unique char substring.
 * CodeRust Interview Preparation.
 * Project Euler
+* Practice folder - This contains a separate file used for practising solved problems
