@@ -65,7 +65,7 @@ class Solution {
         }
 
         public void inOrder() {
-            inOrder(this.root);
+            inOrderWithFormatting("", this.root);
         }
 
         public Node getInOrderSuccessor(Node root) {
@@ -85,6 +85,21 @@ class Solution {
             inOrder(root.left);
             System.out.print(root.data + ", ");
             inOrder(root.right);
+        }
+
+        public void inOrderWithFormatting(String indentation, Node root) {
+            if (root == null) {
+                System.out.println(indentation + "X");
+                return;
+            }
+            if (root.left == null && root.right == null) {
+                System.out.println(indentation + root.data);
+                return;
+            }
+            
+            inOrderWithFormatting(indentation + "\t", root.right);
+            System.out.println(indentation + root.data);
+            inOrderWithFormatting(indentation + "\t", root.left);
         }
     }
 
@@ -126,18 +141,15 @@ class Solution {
     public void execute() {
         BinarySearchTree bst = new BinarySearchTree();
         System.out.println("Insert 3, 2, 1 in bst");
-        bst.insert(10);
+        bst.insert(14);
         bst.insert(15);
-        bst.insert(-4);
-        bst.insert(18);
-        bst.insert(-5);
-        bst.insert(0);
-        bst.insert(9);
-        bst.insert(-18);
+        bst.insert(11);
+        bst.insert(12);
+        bst.insert(7);
         bst.inOrder();
 
-        System.out.println("\nDelete 4");
-        bst.delete(4);
+        System.out.println("\nDelete 2");
+        bst.delete(2);
         bst.inOrder();
     }
 
