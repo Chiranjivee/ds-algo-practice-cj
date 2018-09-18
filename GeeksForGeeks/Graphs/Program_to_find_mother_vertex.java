@@ -53,21 +53,42 @@ class Solution {
             this.nodes.remove(g);
         }
 
-        public void depthFirstSearch() {
+        public void getMotherVertex() {
+            int totalNodes = nodes.size();
+            System.out.println("Total nodes: " + totalNodes);
+            for (GraphNode node : nodes) {
+                int reachableNodes = depthFirstSearch(node);
+                System.out.println("Rechable nodes: " + reachableNodes);
+                if (reachableNodes == totalNodes) {
+                    System.out.println("Found Mother vertex: " + node.data);
+                    return;
+                }
+            }
+
+            System.out.println("No mother vertex found.");
+        }
+
+        private void markAllNodesUnvisited() {
             // Mark all nodes unvisited;
             for (GraphNode node : this.nodes)
                 node.setVisited(false);
+        }
+
+        public int depthFirstSearch(GraphNode start) {
+            // Mark all nodes unvisited;
+            markAllNodesUnvisited();
             
+            int reachableNodes = 0;
             Stack<GraphNode> stack = new Stack<>();
+            stack.push(start);
             for (GraphNode node : this.nodes) {
                 if (node.isVisited()) continue;
-
-                stack.push(node);
 
                 while (!stack.isEmpty()) {
                     // get the current node;
                     GraphNode current = stack.pop();
                     current.setVisited(true);
+                    reachableNodes++;
                     System.out.print(current.getData() + " => ");
 
                     List<GraphNode> currentNeighbours = current.getAllNeighbours();
@@ -77,6 +98,9 @@ class Solution {
                     }
                 }
             }
+
+            markAllNodesUnvisited();
+            return reachableNodes;
         }
     }
 
@@ -97,7 +121,7 @@ class Solution {
         graph.addNode(g3);
         graph.addNode(g4);
 
-        graph.depthFirstSearch();
+        graph.getMotherVertex();
     }
 
     public static void main(String[] args) {
