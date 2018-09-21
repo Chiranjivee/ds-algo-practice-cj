@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -53,7 +55,7 @@ class Solution {
                 node.setVisited(false);
         }
 
-        public boolean doesPathExist(GraphNode start, GraphNode des) {
+        public boolean doesPathExistDFS(GraphNode start, GraphNode des) {
             // Mark all nodes unvisited;
             markAllNodesUnvisited();
             
@@ -71,6 +73,32 @@ class Solution {
                     for (GraphNode neighbour : currentNeighbours) {
                         if (neighbour.isVisited()) continue;
                         stack.push(neighbour);
+                    }
+                }
+            }
+
+            markAllNodesUnvisited();
+            return false;
+        }
+
+        public boolean doesPathExistBFS(GraphNode start, GraphNode des) {
+            // Mark all nodes unvisited;
+            markAllNodesUnvisited();
+            
+            Queue<GraphNode> queue = new LinkedList<>();
+            queue.add(start);
+            for (GraphNode node : this.nodes) {
+                if (node.isVisited()) continue;
+
+                while (!queue.isEmpty()) {
+                    // get the current node;
+                    GraphNode current = queue.remove();
+                    current.setVisited(true);
+                    if (current == des) return true;
+                    List<GraphNode> currentNeighbours = current.getAllNeighbours();
+                    for (GraphNode neighbour : currentNeighbours) {
+                        if (neighbour.isVisited()) continue;
+                        queue.add(neighbour);
                     }
                 }
             }
@@ -102,7 +130,8 @@ class Solution {
         graph.add(g4);
         graph.add(g5);
 
-        System.out.println("Path between 1 & 5: " + graph.doesPathExist(g1, g5));
+        System.out.println("Path between 1 & 5: " + graph.doesPathExistDFS(g1, g5));
+        System.out.println("Path between 1 & 5: " + graph.doesPathExistBFS(g1, g5));
     }
 
     public static void main(String[] args) {
