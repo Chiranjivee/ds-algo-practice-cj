@@ -15,7 +15,11 @@ class DijkstraImpl {
         Set<Node> graphNodes;
 
         Graph() {
-            this.graph = new HashSet<>();
+            this.graphNodes = new HashSet<>();
+        }
+
+        public void addNode(Node node) {
+            this.graphNodes.add(node);
         }
     }
 
@@ -23,7 +27,7 @@ class DijkstraImpl {
     {
         String name;
         List<Node> shortestPathFromSource;
-        Map<Node, Integers> neighbours;
+        Map<Node, Integer> neighbours;
         int distance = Integer.MAX_VALUE;
 
         public Node(String name) {
@@ -36,13 +40,44 @@ class DijkstraImpl {
             this.distance = distance;
         }
 
-        public void addNeighbour(Node neighbour, int edgeLength)
+        public void addDestination(Node neighbour, int edgeLength)
         {
             this.neighbours.put(neighbour, edgeLength);
         }
     }
 
+    public void execute() {
+        Node nodeA = new Node("A");
+        Node nodeB = new Node("B");
+        Node nodeC = new Node("C");
+        Node nodeD = new Node("D"); 
+        Node nodeE = new Node("E");
+        Node nodeF = new Node("F");
+         
+        nodeA.addDestination(nodeB, 10);
+        nodeA.addDestination(nodeC, 15);
+         
+        nodeB.addDestination(nodeD, 12);
+        nodeB.addDestination(nodeF, 15);
+         
+        nodeC.addDestination(nodeE, 10);
+         
+        nodeD.addDestination(nodeE, 2);
+        nodeD.addDestination(nodeF, 1);
+         
+        nodeF.addDestination(nodeE, 5);
+         
+        Graph graph = new Graph();
+         
+        graph.addNode(nodeA);
+        graph.addNode(nodeB);
+        graph.addNode(nodeC);
+        graph.addNode(nodeD);
+        graph.addNode(nodeE);
+        graph.addNode(nodeF);
+    }
     public static void main(String[] args) {
-
+        DijkstraImpl impl = new DijkstraImpl();
+        impl.execute();
     }
 }
