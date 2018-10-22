@@ -10,8 +10,10 @@ class Solution {
             tpp = -1;
         }
 
-        public void push(int i) {
-            if (top < MAX_SIZE - 1) {
+        public void push(int i)
+        {
+            if (top < MAX_SIZE - 1)
+            {
                 arr[++top] = i;
                 return;
             }
@@ -19,11 +21,13 @@ class Solution {
             throw new Exception("Stack is full.");
         }
 
-        public int peek() {
+        public int peek()
+        {
             return arr[top];
         }
 
-        public int pop() {
+        public int pop()
+        {
             if (top == -1) throw new Exception("Stack is empty.");
             return arr[top--];
         }
