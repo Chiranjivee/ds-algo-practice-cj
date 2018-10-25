@@ -10,12 +10,15 @@ class Solution {
         System.out.println("Input array is: " + Arrays.toString(test2));
         System.out.println("Sorted: " + isArraySorted(test2, test2.length));
     }
+
     public static boolean isArraySorted(int [] array, int index) {
         if (index == 1) {
             return true;
         }
 
-        return array[index - 2] < array[index - 1] ? 
-            isArraySorted(array, index - 1) : false;
+        return 
+            array[index - 2] < array[index - 1] ? 
+            isArraySorted(array, index - 1) : 
+            false;
     }
 }
