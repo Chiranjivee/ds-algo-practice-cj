@@ -5,7 +5,6 @@
  * Write a program to add two numbers with plus operator.
  */
 class Solution {
-
     public static int addNum(int x, int y) {
         if (y == 0) return x;
         int sum = x ^ y;

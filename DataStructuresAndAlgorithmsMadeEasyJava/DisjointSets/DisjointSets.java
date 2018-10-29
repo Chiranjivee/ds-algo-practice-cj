@@ -63,6 +63,10 @@ class DisjointSets {
         set.makeSet(5);
         set.makeSet(6);
         set.makeSet(7);
+        set.makeSet(8);
+        set.makeSet(9);
+        set.makeSet(10);
+
 
         ds.union(1, 2);
         ds.union(2, 3);
@@ -70,6 +74,8 @@ class DisjointSets {
         ds.union(6, 7);
         ds.union(5, 6);
         ds.union(3, 7);
+        ds.union(8, 9);
+        ds.union(9, 10);
 
         System.out.println("Parent of 1 is: " + set.findSet(1));
         System.out.println("Parent of 2 is: " + set.findSet(2));
@@ -78,6 +84,8 @@ class DisjointSets {
         System.out.println("Parent of 5 is: " + set.findSet(5));
         System.out.println("Parent of 6 is: " + set.findSet(6));
         System.out.println("Parent of 7 is: " + set.findSet(7));
+        System.out.println("Parent of 8 is: " + set.findSet(8));
+        System.out.println("Parent of 9 is: " + set.findSet(9));
     }
 
 }
