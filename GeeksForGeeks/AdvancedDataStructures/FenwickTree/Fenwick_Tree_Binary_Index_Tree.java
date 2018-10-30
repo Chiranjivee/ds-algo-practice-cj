@@ -27,7 +27,6 @@ class BinaryIndexTree {
         while(index > 0) {
             sum += tree[index];
             index = getPrevElement(index);
-            // 5 , 101 & 010
         }
         return sum;
     }
