@@ -52,8 +52,6 @@ class DisjointSets {
         }
     }
 
-
-
     public static void main(String[] args) {
         DisjointSets set = new DisjointSets();
         set.makeSet(1);
@@ -66,7 +64,6 @@ class DisjointSets {
         set.makeSet(8);
         set.makeSet(9);
         set.makeSet(10);
-
 
         ds.union(1, 2);
         ds.union(2, 3);
