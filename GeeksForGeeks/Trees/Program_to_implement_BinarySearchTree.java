@@ -21,15 +21,60 @@ class BinarySearchTree {
     TreeNode insert(TreeNode root, TreeNode node) {
         if (root == null) {
             return node;
-        }
-        else if (root.data > node.data) {
+        } else if (root.data > node.data) {
             root.left = insert(root.left, node);
-        }
-        else {
+        } else {
             root.right = insert(root.right, node);
         }
 
         return root;
+    }
+
+    void contains(int data) {
+        boolean isPresent = containsUtil(this.root, data);
+        System.out.println("Is " + data + " present: " + isPresent);
+    }
+
+    boolean containsUtil(TreeNode root, int data) {
+        if (root == null) return false;
+        if (root.data < data) {
+            return containsUtil(root.right, data);
+        } else if (root.data > data) {
+            return containUtils(root.left, data);
+        }
+
+        return true;        
+    }
+
+    void delete(int data) {
+        this.root = deleteUtil(root, data);
+    }
+
+    TreeNode deleteUtil(TreeNode root, int data) {
+        if (root == null) return root;
+        if (data < root.data) {
+            root.left = deleteUtil(root.left, data);
+        } else if (data > root.data) {
+            root.right = deleteUtil(root.right, data);
+        } else {
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            } else {
+                root.data = getMinInRightSubTree(root.right);
+                root.right = deleteUtil(root.right, root.data);
+            }
+        }
+
+        return root;
+    }
+
+    int getMinInRightSubTree(TreeNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node.data;
     }
 
     void traverseInorder() {
@@ -56,6 +101,12 @@ class BinarySearchTree {
         bst.insert(1);
         bst.insert(3);
 
+        bst.traverseInorder();
+
+        bst.contains(3);
+        bst.contains(4);
+
+        bst.delete(2);
         bst.traverseInorder();
     }
 }
