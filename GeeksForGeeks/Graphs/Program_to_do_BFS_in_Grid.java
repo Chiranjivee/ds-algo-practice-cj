@@ -13,7 +13,6 @@ class GridNode {
 }
 
 class Graph {
-
 	int [] xMoves = {1, 0, -1, 0};
 	int [] yMoves = {0, 1, 0, -1};
 
