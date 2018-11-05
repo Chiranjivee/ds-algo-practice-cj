@@ -76,13 +76,13 @@ class Graph {
     */
     void dfs(int startNodeIndex) {
         System.out.println("Starting dfs from node: " + startNodeIndex);
-        Stack<Integer> stack = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
 
         boolean visited[] = new boolean[maxVerticesCount];
         stack.push(startNodeIndex);
         visited[startNodeIndex] =  true;
 
-        while (!queue.isEmpty()) {
+        while (!stack.isEmpty()) {
             Integer vertexIndex = stack.pop();
             System.out.print(vertexIndex + " => ");
             for (int i = 0; i < maxVerticesCount; i++) {
@@ -94,6 +94,42 @@ class Graph {
         }
         System.out.println(" X");
         System.out.println("Done DFS");
+    }
+
+    
+    /**
+     * This function will do a dfs and detect a cycle
+     * in a graph.
+    */
+    boolean hasCycle() {
+        boolean visited [] = new boolean[maxVerticesCount];
+        boolean recursiveStack [] = new boolean[maxVerticesCount];
+        boolean hasCycle = false;
+        for (int startNodeIndex = 0; startNodeIndex < verticesCount; startNodeIndex++) {
+            if (visited[startNodeIndex]) continue;
+
+            Stack<Integer> stack = new Stack<>();
+            stack.push(startNodeIndex);
+            visited[startNodeIndex] =  true;
+            recursiveStack[startNodeIndex] = true;
+
+            while (!stack.isEmpty()) {
+                Integer vertexIndex = stack.pop();
+                for (int i = 0; i < maxVerticesCount; i++) {
+                    if (adjMatrix[vertexIndex][i] != 0 && !visited[i]) {
+                        stack.push(i);
+                        visited[i] = true;
+                    } else if (adjMatrix[vertexIndex][i] != 0 && visited[i]) {
+                        if (recursiveStack[i] == true) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            recursiveStack[startNodeIndex] = false;
+        }
+
+        return hasCycle;
     }
 
     /*
@@ -117,11 +153,14 @@ class Graph {
         graph.addEdge(2, 3, 2);
         graph.addEdge(1, 3, 1);
         graph.addEdge(1, 2, 7);
+        graph.addEdge(2, 0, 7);
 
         graph.showAdjMatrix();
 
         graph.bfs(0);
         graph.bfs(3);
+
+        System.out.println("Graph has cycle: " + graph.hasCycle());
     }
 }
 
