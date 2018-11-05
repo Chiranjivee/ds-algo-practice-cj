@@ -1,3 +1,6 @@
+import java.util.Queue;
+import java.util.ArrayDeque;
+
 class Graph {
     int [] vertices;
     int maxVerticesCount;
@@ -39,6 +42,32 @@ class Graph {
         }
     }
 
+    /**
+     * this function will do a bfs traversal on graph
+     * with the given starting node index
+    */
+    void bfs(int startNodeIndex) {
+        System.out.println("Starting bfs from node: " + startNodeIndex);
+        Queue<Integer> queue = new ArrayDeque<>();
+
+        boolean visited[] = new boolean[maxVerticesCount];
+        queue.offer(startNodeIndex);
+        visited[startNodeIndex] =  true;
+
+        while (!queue.isEmpty()) {
+            Integer vertexIndex = queue.poll();
+            System.out.print(vertexIndex + " => ");
+            for (int i = 0; i < maxVerticesCount; i++) {
+                if (adjMatrix[vertexIndex][i] != 0 && !visited[i]) {
+                    queue.offer(i);
+                    visited[i] = true;
+                }
+            }
+        }
+        System.out.println(" X");
+        System.out.println("Done BFS");
+    }
+
     /*
         (0) --5--> (1)
                   / |
@@ -62,6 +91,9 @@ class Graph {
         graph.addEdge(1, 2, 7);
 
         graph.showAdjMatrix();
+
+        graph.bfs(0);
+        graph.bfs(3);
     }
 }
 
