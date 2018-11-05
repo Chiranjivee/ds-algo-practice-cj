@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Queue;
 
 class Graph {
     Map<GraphNode, LinkedList<GraphNode>> adjList;
@@ -70,6 +71,38 @@ class Graph {
         return builder.toString();
     }
 
+    public void breadthFirstSearchOnGraph() {
+        resetVertices();
+        for (GraphNode node : vertices) {
+            if (!node.visited) breadthFirstSearchFromNode(node);
+        }
+        resetVertices();
+    }
+
+    public void breadthFirstSearchFromNode(GraphNode node) {
+        Queue<GraphNode> queue = new LinkedList<>();
+        
+        node.visited = true;
+        queue.offer(node);
+
+        while (!queue.isEmpty()) {
+            GraphNode temp = queue.poll();
+            System.out.print(temp.data + " => ");
+            for (GraphNode neighBour : adjList.get(temp)) {
+                if (!neighBour.visited) {
+                    neighBour.visited = true;
+                    queue.offer(neighBour);
+                }
+            }
+        }
+    }
+
+    public void resetVertices() {
+        for (GraphNode node : vertices) {
+            node.visited = false;
+        }
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph();
 
@@ -87,15 +120,19 @@ class Graph {
         graph.addEdge(one, three);
         graph.addEdge(three, four);
 
-
         graph.showAdjList();
+
+        graph.breadthFirstSearchOnGraph();
+        graph.breadthFirstSearchFromNode(one);
     }
 }
 
 class GraphNode {
     int data;
+    boolean visited;
     public GraphNode(int data) {
         this.data = data;
+        this.visited = false;
     }
 
     @Override
