@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Stack;
 
 class Graph {
     Map<GraphNode, LinkedList<GraphNode>> adjList;
@@ -79,6 +80,52 @@ class Graph {
         resetVertices();
     }
 
+    public void depthFirstSearchForAll() {
+        resetVertices();
+        for (GraphNode node : vertices) {
+            if (!node.visited) breadthFirstSearchFromNode(node);
+        }
+        resetVertices();
+    }
+
+    public void depthFirstSearchRecursive() {
+        resetVertices();
+        for (GraphNode node : vertices) {
+            if (!node.visited) breadthFirstSearchFromNode(node);
+        }
+        System.out.println(" X");
+        resetVertices();
+    }
+
+    public void depthFirstSearchRecursiveUtil(GraphNode node) {
+        if (!node.visited) {
+            return;
+        }
+
+        System.out.print(node.data + " => ");
+
+        for (GraphNode neighBour : this.adjList.get(node)) {
+            depthFirstSearchRecursiveUtil(neighBour);
+        }
+    }
+
+    public void depthFirstSearchUtil(GraphNode node) {
+        Stack<GraphNode> stack = new Stack<>();
+
+        node.visited = true;
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            GraphNode temp = stack.pop();
+            for (GraphNode neighBour : this.adjList.get(temp)) {
+                if (!neighBour.visited) {
+                    neighBour.visited = true;
+                    stack.push(neighBour);
+                }
+            }
+        }
+    }
+
     public void breadthFirstSearchFromNode(GraphNode node) {
         Queue<GraphNode> queue = new LinkedList<>();
         
@@ -124,6 +171,12 @@ class Graph {
 
         graph.breadthFirstSearchOnGraph();
         graph.breadthFirstSearchFromNode(one);
+
+        System.out.println("Depth-First-Search Recursive:");
+        graph.depthFirstSearchRecursive();
+
+        System.out.println("Depth-First-Search Iterative:");
+        graph.depthFirstSearchForAll();
     }
 }
 
