@@ -1,5 +1,7 @@
 import java.util.Queue;
+import java.util.Stack;
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 
 class Graph {
     int [] vertices;
@@ -66,6 +68,32 @@ class Graph {
         }
         System.out.println(" X");
         System.out.println("Done BFS");
+    }
+
+    /**
+     * This function will do a bfs traversal on graph
+     * with the given starting node index
+    */
+    void dfs(int startNodeIndex) {
+        System.out.println("Starting dfs from node: " + startNodeIndex);
+        Stack<Integer> stack = new LinkedList<>();
+
+        boolean visited[] = new boolean[maxVerticesCount];
+        stack.push(startNodeIndex);
+        visited[startNodeIndex] =  true;
+
+        while (!queue.isEmpty()) {
+            Integer vertexIndex = stack.pop();
+            System.out.print(vertexIndex + " => ");
+            for (int i = 0; i < maxVerticesCount; i++) {
+                if (adjMatrix[vertexIndex][i] != 0 && !visited[i]) {
+                    stack.push(i);
+                    visited[i] = true;
+                }
+            }
+        }
+        System.out.println(" X");
+        System.out.println("Done DFS");
     }
 
     /*
