@@ -10,7 +10,7 @@ class BIT {
     public void update(int i, int delta) {
         while (i < size) {
             table[i] += delta;
-            i = Integer.lowestOneBit(i);
+            i += Integer.lowestOneBit(i);
         }
     }
 
