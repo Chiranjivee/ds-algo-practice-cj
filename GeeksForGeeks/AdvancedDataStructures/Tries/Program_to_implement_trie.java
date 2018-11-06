@@ -15,7 +15,6 @@ class Trie {
     public Trie(String [] words) {
         root = new TrieNode();
         for (String word : words) {
-            // System.out.println("Inserting word: " + word);
             root.insertWord(word);
         }
     }
@@ -24,7 +23,6 @@ class Trie {
         TrieNode lastNode = root;
         
         for (int i = 0; i < prefix.length(); i++) {
-            // System.out.println("Current letter is: " + prefix.charAt(i));
             lastNode = lastNode.getChild(prefix.charAt(i));
             if (lastNode == null) {
                 return false;
@@ -69,7 +67,6 @@ class TrieNode {
         }
 
         char firstChar = word.charAt(0);
-        // System.out.println("First char: " + firstChar);
         TrieNode child = getChild(firstChar);
 
         if (child == null) {
@@ -82,7 +79,6 @@ class TrieNode {
         } else {
             child.isWordEnding = true;
         }
-
     }
 
     public TrieNode getChild(char c) {
