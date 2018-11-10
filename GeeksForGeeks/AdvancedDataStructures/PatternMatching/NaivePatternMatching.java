@@ -5,7 +5,6 @@ class NaivePatternMatching {
         } 
 
         if (pattern.length() == 0) return true;
-        // aa a
         for (int i = 0; i < text.length() - pattern.length() + 1; i++) {
             int start = i;
             for (int j = 0; j < pattern.length(); j++) {
