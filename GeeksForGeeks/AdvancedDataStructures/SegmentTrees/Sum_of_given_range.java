@@ -24,10 +24,10 @@ class SegmentTree {
             return arr[segmentStart];
         }
         int mid = (segmentStart + segmentEnd) / 2;
-        int leftMin = constructSegmentTree(arr, segmentStart, mid, nodeIndex * 2 + 1);
-        int rightMin = constructSegmentTree(arr, mid + 1, segmentEnd, nodeIndex * 2 + 2);
+        int leftSum = constructSegmentTree(arr, segmentStart, mid, nodeIndex * 2 + 1);
+        int rightSum = constructSegmentTree(arr, mid + 1, segmentEnd, nodeIndex * 2 + 2);
 
-        segmentTree[nodeIndex] = leftMin + rightMin;
+        segmentTree[nodeIndex] = leftSum + rightSum;
         return segmentTree[nodeIndex];
     }
 
