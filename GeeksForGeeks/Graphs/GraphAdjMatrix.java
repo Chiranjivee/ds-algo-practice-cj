@@ -52,6 +52,10 @@ class Graph {
         }
     }
 
+    int getEdgeCount() {
+        
+    }
+
     void removeEdge(int u, int v) {
         if (u >= 0 && u < verticesCount
             && v >= 0 && v < verticesCount) {
@@ -99,15 +103,16 @@ class Graph {
         for (int i = 0; i < maxVerticesCount; i++) {
             distance[i] = Integer.MAX_VALUE;
         }
-
+        boolean[] SPT = new boolean[maxVerticesCount];
         distance[startNodeIndex] = 0;
         parent[startNodeIndex] = -1;
         queue.offer(new GraphPQNode(startNodeIndex, distance[startNodeIndex]));
 
         while (!queue.isEmpty()) {
             GraphPQNode current = queue.poll();
+            SPT[current.node] = true;
             for (int i = 0; i < maxVerticesCount; i++) {
-                if (adjMatrix[current.node][i] != 0) {
+                if (adjMatrix[current.node][i] != 0 && !SPT[i]) {
                     int newNeighbourDistance = distance[current.node] + adjMatrix[current.node][i];
                     GraphPQNode neighBour = new GraphPQNode(i, distance[i]);
                     if (newNeighbourDistance < distance[i]) {
@@ -120,8 +125,6 @@ class Graph {
                 }
             }
         }
-        System.out.println(" X");
-        System.out.println("Done BFS");
     }
 
     /**
@@ -209,30 +212,47 @@ class Graph {
     */
     public static void main(String [] args) {
         Graph graph = new Graph(4);
+        // graph.addVertex(0);
+        // graph.addVertex(1);
+        // graph.addVertex(2);
+        // graph.addVertex(3);
+
+        // graph.addEdge(0, 1, 5);
+        // graph.addEdge(2, 3, 2);
+        // graph.addEdge(1, 3, 1);
+        // graph.addEdge(1, 2, 7);
+        // graph.addEdge(2, 0, 7);
+
+        // graph.showAdjMatrix();
+
+        // graph.bfs(0);
+        // graph.bfs(3);
+
+        // System.out.println("Graph has cycle: " + graph.hasCycle());
+        // int [] distance = new int[graph.maxVerticesCount];
+        // int [] parent = new int [graph.maxVerticesCount];
+
+        // graph.findShortestPathUsingDijkstra(0, parent, distance);
+        // System.out.println(Arrays.toString(distance));
+        // System.out.println(Arrays.toString(parent));
+
+        // String result = graph.printPathFromSrc(distance, parent, 0, 2).toString();
+        // System.out.println(result);
+
         graph.addVertex(0);
         graph.addVertex(1);
         graph.addVertex(2);
-        graph.addVertex(3);
 
         graph.addEdge(0, 1, 5);
-        graph.addEdge(2, 3, 2);
-        graph.addEdge(1, 3, 1);
-        graph.addEdge(1, 2, 7);
-        graph.addEdge(2, 0, 7);
+        graph.addEdge(0, 2, 2);
+        graph.addEdge(1, 2, -10);
 
-        graph.showAdjMatrix();
-
-        graph.bfs(0);
-        graph.bfs(3);
-
-        System.out.println("Graph has cycle: " + graph.hasCycle());
         int [] distance = new int[graph.maxVerticesCount];
         int [] parent = new int [graph.maxVerticesCount];
-
         graph.findShortestPathUsingDijkstra(0, parent, distance);
-        System.out.println(Arrays.toString(distance));
-        System.out.println(Arrays.toString(parent));
 
+        System.out.println(Arrays.toString(distance));
+        // System.out.println(Arrays.toString(parent));
         String result = graph.printPathFromSrc(distance, parent, 0, 2).toString();
         System.out.println(result);
     }
