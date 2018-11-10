@@ -19,6 +19,28 @@ class Trie {
         }
     }
 
+    public void remove(String word) {
+        if (word == null || word.length() == 0) {
+            return;
+        }
+        removeUtil(word, root);
+    }
+
+    public boolean removeUtil(String word, TrieNode current) {
+        if (word.length() == 0) {
+            current.isWordEnding = current.children.size() == 0;
+            return current.isWordEnding;
+        }
+
+        char c = word.charAt(0);
+        if (current.children.get(c) != null && removeUtil(word.substring(1), current.children.get(c))) {
+            current.children.remove(current.children.get(c).character);
+            return current.children.size() == 0 && !current.isWordEnding;
+        }
+
+        return false;
+    }
+
     public boolean contains(String prefix, boolean exact) {
         TrieNode lastNode = root;
         
@@ -41,9 +63,13 @@ class Trie {
 
         System.out.println("Contains 'This' :" + trie.contains("This", true));
         System.out.println("Contains 'is' :" + trie.contains("is"));
-        System.out.println("Contains 'some' :" + trie.contains("a"));
-        System.out.println("Contains 'random' :" + trie.contains("test"));
+        System.out.println("Contains 'some' :" + trie.contains("some"));
+        System.out.println("Contains 'random' :" + trie.contains("random"));
         System.out.println("Contains 'somerandomshit' :" + trie.contains("somerandomshit"));
+
+        System.out.println("Remove 'random':"); trie.remove("random");
+        System.out.println("Contains 'random' :" + trie.contains("random"));
+
     }
 }
 
