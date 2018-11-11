@@ -1,3 +1,4 @@
+import java.util.Arrays;
 class StringPermutation {
 
     /**
@@ -17,7 +18,8 @@ class StringPermutation {
      *         -> ab "c" -> a "cb" -> "" cba
      *                   -> b "ca" -> "" cab
      */ 
-    public void showPermutations(String input) {
+    public void showPermutationsForString(String input) {
+        System.out.println("Permuting string: " + input);
         if (input == null || input.length() == 0) {
             return;
         }
@@ -25,9 +27,41 @@ class StringPermutation {
         showPermutationsUtil(new StringBuilder(input), new StringBuilder());
     }
 
+    public void showPermutationsForArray(char[] input) {
+        System.out.println("Permuting array: " + Arrays.toString(input));
+        if (input == null || input.length == 0) {
+            return;
+        }
+
+        showPermutationsUtilArray(input, new StringBuilder(), 0);
+    }
+    // a, b "" 0 -> a, b "a" 1 -> a, b "ab" 2
+    //           -> a, b "b"              -> a, b
+    public void showPermutationsUtilArray(char[] input, StringBuilder perm, int position) {
+        if (perm.length() == input.length) {
+            System.out.println(new String(input));
+            return;
+        }
+
+        for (int i = position; i < input.length; i++) {
+            perm.append(input[i]);
+            swap(input, i, position);
+            showPermutationsUtilArray(input, perm, ++position);
+            swap(input, i, --position);
+            perm.deleteCharAt(perm.length() - 1);
+        }
+    }
+
+    public void swap(char [] input, int x, int y) {
+        char temp = input[x];
+        input[x] = input[y];
+        input[y] = temp;
+    }
+
     public void showPermutationsUtil(StringBuilder input, StringBuilder permutation) {
         if (input.length() == 0) {
-            System.out.println(++count + ">" + permutation);
+            System.out.println(permutation);
+            return;
         }
         for (int i = 0; i < input.length(); i++) {
             permutation.append(input.charAt(i));
@@ -40,6 +74,7 @@ class StringPermutation {
 
     public static void main(String[] args) {
         StringPermutation permutation = new StringPermutation();
-        permutation.showPermutations("abcd");
+        permutation.showPermutationsForString("ab");
+        permutation.showPermutationsForArray("ab".toCharArray());
     }
 }
