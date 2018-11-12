@@ -19,7 +19,34 @@ class ComputeParity {
         }
         return result;
     }
-    public static void main(String[] args) {
 
+    /**
+     * Time complexity: O(parity)
+     * For every word keep flipping the lowest set bit and do
+     * add with modulo 2. This is better than O(n), but we need to 
+     * do better.
+     */
+    public int getParityWithBetterTimeComplexity(int x) {
+        int result = 0;
+        while (x != 0) {
+            result ^= 1;
+            x &= (x - 1); // Drops the lowest set bit.
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        int [] test = { 1, 2, 3, 4, 5 };
+        ComputeParity parity = new ComputeParity();
+        for (int x : test) {
+            System.out.println(
+                "Parity of " + test[x] + " is: " + 
+                    parity.getParity(x));
+        }
+
+        for (int x : test) {
+            System.out.println(
+                "Parity of " + test[x] + " is: " + 
+                    parity.getParityWithBetterTimeComplexity(x));
+        }
     }
 }
