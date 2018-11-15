@@ -1,4 +1,7 @@
 class IsPalindrome {
+    /**
+     * Time complexity: O(n)
+     */
     public static boolean isStringPalindrome(String input) {
         if (input == null) return false;
         if (input == "") return true;
