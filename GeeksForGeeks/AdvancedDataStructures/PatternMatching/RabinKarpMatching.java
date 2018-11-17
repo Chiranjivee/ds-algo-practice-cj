@@ -1,8 +1,8 @@
 class RabinKarpMatching {
 
+    int primeNumber = 3;
     public double getHashForPattern (String pattern) {
         double hash = 0;
-        int primeNumber = 3;
         int power = 0;
         for (int i = 0; i < pattern.length(); i++ , power++) {
             int tempChar = (int) pattern.charAt(i);
@@ -17,7 +17,7 @@ class RabinKarpMatching {
         }
 
         hash -= (int) text.charAt(start - 1);
-        hash /= 3;
+        hash /= primeNumber;
         hash += (int) text.charAt(end) * Math.pow(3, end - start);
         return hash;
     }

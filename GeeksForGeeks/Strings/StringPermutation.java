@@ -36,7 +36,7 @@ class StringPermutation {
         showPermutationsUtilArray(input, new StringBuilder(), 0);
     }
     // a, b "" 0 -> a, b "a" 1 -> a, b "ab" 2
-    //           -> a, b "b"              -> a, b
+    //           -> a, b "b" 2 -> a, b
     public void showPermutationsUtilArray(char[] input, StringBuilder perm, int position) {
         if (perm.length() == input.length) {
             System.out.println(new String(input));

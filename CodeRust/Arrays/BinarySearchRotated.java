@@ -24,6 +24,5 @@ class BinarySearchRotated {
         int [] input = { 23, 44, 55, 1, 10 };
         BinarySearchRotated searchRotated = new BinarySearchRotated();
         System.out.println("Search 1: " + searchRotated.search(input, 0, input.length - 1, 1));
-
     }
 }
