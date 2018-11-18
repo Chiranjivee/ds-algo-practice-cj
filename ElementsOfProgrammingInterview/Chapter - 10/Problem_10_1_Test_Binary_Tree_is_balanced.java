@@ -17,8 +17,9 @@ class IsBinaryTreeBalanced {
 
         return new 
             BalanceStatus(
-                left.isBalanced && right.isBalanced &&
-                Math.abs(left.height - right.height) <= 1, 
+                left.isBalanced && 
+                    right.isBalanced &&
+                    Math.abs(left.height - right.height) <= 1, 
                 Math.max(left.height, right.height) + 1);
     }
 
