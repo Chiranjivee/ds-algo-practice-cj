@@ -4,6 +4,7 @@ class OverlappingListsWithoutCycles {
         if (l1.head == null || l2.head == null) {
             return false;
         }
+
         ListNode head1 = l1.head;
         ListNode head2 = l2.head;
 
@@ -21,6 +22,7 @@ class OverlappingListsWithoutCycles {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -28,17 +30,21 @@ class OverlappingListsWithoutCycles {
         while (times-- > 0) {
             head = head.next;
         }
+
         return head;
     }
 
     public int getLinkedListLengthFromHead(ListNode head) {
         if (head == null) return 0;
+
         int length = 0;
         ListNode current = head;
+
         while (current != null) {
             length++;
             current = current.next;
         }
+
         return length;
     }
 
@@ -57,11 +63,13 @@ class LinkedList {
         if (head == null) {
             System.out.println("List is empty");
         }
+
         ListNode current = head;
         while(current != null) {
             System.out.print(current.data + " -> ");
             current = current.next;
         }
+
         System.out.println("X");
     }
 
@@ -87,6 +95,7 @@ class LinkedList {
         while (current.next != null) {
             current = current.next;
         }
+
         current.next = dataNode;
     }
 }
