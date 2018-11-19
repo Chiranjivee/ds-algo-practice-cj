@@ -27,6 +27,29 @@ class MergeSortedLists {
         return result;
     }
 
+    public LinkedList mergeListsApproachTwo(LinkedList list1, LinkedList list2) {
+        LinkedList result = new LinkedList();
+        result.addAtBeginning(-1);
+        ListNode dummyHead = result.head;
+        ListNode pointer1 = list1.head;
+        ListNode pointer2 = list2.head;
+        while (pointer1 != null && pointer2 != null) {
+            if (pointer1.data < pointer2.data) {
+                dummyHead.next = pointer1;
+                dummyHead = dummyHead.next;
+                pointer1 = pointer1.next;
+            } else {
+                dummyHead.next = pointer2;
+                dummyHead = dummyHead.next;
+                pointer2 = pointer2.next;
+            }
+        }
+        
+        dummyHead.next = pointer1 == null ? pointer2 : pointer1;
+        result.head = result.head.next;
+        return result;
+    }
+
     public static void main(String[] args) {
         LinkedList list1 = new LinkedList();
         list1.addAtEnd(1);
@@ -47,6 +70,8 @@ class MergeSortedLists {
         MergeSortedLists merger = new MergeSortedLists();
         LinkedList result = merger.mergeLists(list1, list2);
         result.print();
+        LinkedList result2 = merger.mergeListsApproachTwo(list1, list2);
+        result2.print();
     }
 }
 
