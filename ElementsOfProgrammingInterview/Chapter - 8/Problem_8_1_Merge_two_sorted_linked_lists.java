@@ -69,9 +69,15 @@ class MergeSortedLists {
 
         MergeSortedLists merger = new MergeSortedLists();
         LinkedList result = merger.mergeLists(list1, list2);
+        list1.print();
+        list2.print();
         result.print();
+        
         LinkedList result2 = merger.mergeListsApproachTwo(list1, list2);
         result2.print();
+
+        list1.print();
+        list2.print();
     }
 }
 
