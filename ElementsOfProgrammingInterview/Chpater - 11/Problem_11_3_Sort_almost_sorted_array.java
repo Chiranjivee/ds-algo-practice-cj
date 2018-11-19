@@ -2,8 +2,8 @@ import java.util.PriorityQueue;
 import java.util.Arrays;
 
 /**
- * k sorted array is an array 
- * in ewhich every element element is at max
+ * K Sorted array is an array 
+ * in which every element element is at max
  * k distance away from it's actual location.
  */
 class SortKSorted {
