@@ -14,14 +14,20 @@ class MergeSortedArrays {
         PriorityQueue<PQEntry> queue = new PriorityQueue<>(input.size(), (a, b) -> a.value - b.value);
         for (int i = 0; i < input.size(); i++) {
             if (iterList.get(i).hasNext())
-                queue.offer(new PQEntry(i, iterList.get(i).next()));
+                queue.offer(
+                    new PQEntry(
+                        i, 
+                        iterList.get(i).next()));
         }
         List<Integer> resultList = new ArrayList<>();
         while (!queue.isEmpty()) {
             PQEntry resultEntry = queue.poll();
             resultList.add(resultEntry.value);
             if (iterList.get(resultEntry.arrayId).hasNext())
-                queue.add(new PQEntry(resultEntry.arrayId, iterList.get(resultEntry.arrayId).next()));
+                queue.add(
+                    new PQEntry(
+                        resultEntry.arrayId, 
+                        iterList.get(resultEntry.arrayId).next()));
         }
         return resultList;
     }
