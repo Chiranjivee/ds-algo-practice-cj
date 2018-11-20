@@ -12,16 +12,16 @@ class IntegerSquareRoot {
             mid = start + (end - start) / 2;
             int midSquared = mid * mid;
             if (n == midSquared) return mid;
-            else if (midSquared < n) {
+            else if (midSquared <= n) {
                 start = mid + 1;
             } else {
                 end = mid - 1;
             }
         }
-        return mid;
+        return (int) mid - 1;
     }
 
     public static void main(String[] args) {
-        System.out.println(largestIntegerSquareClosestToN(6));
+        System.out.println(largestIntegerSquareClosestToN(37));
     }
 }
