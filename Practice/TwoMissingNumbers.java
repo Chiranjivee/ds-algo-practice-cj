@@ -22,15 +22,20 @@ class TwoMissingNumbers {
         int rightMostSetBit = xor & ~(xor - 1);
         int x = 0; 
         int y = 0;
+        // XORing in the input array
         for (int i = 0; i < actual.length; i++) {
+            // XORing only those elements who have rightmost bit set in the XOR set.
             if ((actual[i] & rightMostSetBit) > 0) {
                 x ^= actual[i];
             } else {
+                // XORing only those elements who have rightmost bit unset in the XOR set.
                 y ^= actual[i];
             }
         }
 
+        // XORing over the range.
         for (int i = 0; i < n; i++) {
+            // XORing only those elements who have rightmost bit in the XOR set.
             if ((i & rightMostSetBit) > 0) {
                 x ^= i;
             } else {
