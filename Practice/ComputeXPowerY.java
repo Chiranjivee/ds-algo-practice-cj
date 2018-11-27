@@ -1,4 +1,18 @@
 class XPowerY {
+    public static double powerIter(int x, int y) { // 8
+        double result = 1;
+        while (y > 0) { // 6 > 0 3
+            if ((y & 1) > 0) {
+                result *= x; // 25
+            }
+
+            y = y >> 1;
+            x = x * x;
+        }
+
+        return result;
+    }
+
     public static double power(int x, int y) {
         if (y == 0) {
             return 1;
@@ -21,6 +35,7 @@ class XPowerY {
         System.out.println(XPowerY.power(2, 10));
         System.out.println(XPowerY.power(4, 3));
         System.out.println(XPowerY.power(3, 4));
+        System.out.println(XPowerY.powerIter(5, 6));
     }
 }
 
