@@ -7,7 +7,7 @@ class IterativeInorder {
         }
         Stack<TreeNode> stack = new Stack<>();
         TreeNode current = root;
-        while (current != null || stack.size() != 0) {
+        while (current != null || !stack.isEmpty()) {
             while (current != null) {
                 stack.push(current);
                 current = current.left;
@@ -16,7 +16,7 @@ class IterativeInorder {
             System.out.print(current.data + " -> ");
             current = current.right;
         }
-        System.out.print("X ");
+        System.out.println("X");
     }
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
