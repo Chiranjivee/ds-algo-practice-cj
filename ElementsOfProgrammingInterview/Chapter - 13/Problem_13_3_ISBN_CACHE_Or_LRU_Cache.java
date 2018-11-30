@@ -8,7 +8,7 @@ class LRUCache {
 
     public LRUCache(int size) {
         this.capacity = size;
-        this.cache = new LinkedHashMap<>(size, 1.0f, true) {
+        this.cache = new LinkedHashMap<>(size, 0.75f, true) {
             @Override
             protected boolean removeEldestEntry(Map.Entry<Integer, Integer> e) {
                 return this.size() > size;
@@ -35,8 +35,9 @@ class LRUCache {
     }
 
     public void showCache() {
+        System.out.println("Status: " + cache.keySet().toString());
         for (Map.Entry<Integer, Integer> entry : cache.entrySet()) {
-            System.out.println("Entry:" + entry.getKey() + ", " + "Value: " + entry.getValue());
+            System.out.println("Entry: " + entry.getKey() + ", Value: " + entry.getValue());
         }
     }
 
@@ -45,9 +46,10 @@ class LRUCache {
         cache.insert(1, 1);
         cache.insert(2, 2);
 
+        cache.showCache();
         System.out.println("Cache read 1: " + cache.read(1));
+        cache.showCache();
         System.out.println("Cache read 2: " + cache.read(2));
-        System.out.println("Cache read 3: " + cache.read(3));
         cache.showCache();
     }
 }
