@@ -18,27 +18,23 @@ class Solution {
         if (nums.length < 3) {
             throw new IllegalArgumentException();
         }
-
-        Set<Integer> intSet = new HashSet<>();
-        for (int i = 0; i < nums.length; i++) {
-            intSet.add(nums[i]);
-        }
-
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                int temp = -1 * (nums[i] + nums[j]);
-                if (intSet.contains(temp)) {
-                    Integer [] tempArr = new Integer [] {nums[i], nums[j], temp};
-                    List<Integer> resultTemp =
-                        Arrays.asList(tempArr);
-                    result.add(resultTemp);
-                    intSet.remove(temp);
-                    intSet.remove(nums[i]);
-                    intSet.remove(nums[j]);
+        Set<List<Integer>> result = new HashSet<>();
+        Arrays.sort(nums);
+        
+        for (int i = 0; i < nums.length - 2; i++) {
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum == 0) {
+                    System.out.println("Adding:" + nums[i] + " " + nums[j] + " "+ nums[k] + " to set.");
+                    result.add(Arrays.asList(nums[i], nums[j++], nums[k--]));
                 }
+                if (sum < 0) j++;
+                if (sum > 0) k--;
             }
         }
-        return result;
+       
+        return new ArrayList<>(result);
     }
 }
