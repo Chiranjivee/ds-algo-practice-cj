@@ -66,6 +66,5 @@ class MinSegmentTree {
         System.out.println("Minimum in range (0, 4): " + result);
         result = segmentTree.getMinInRange(3, 4);
         System.out.println("Minimum in range (3, 4): " + result);
-
     }
 }
