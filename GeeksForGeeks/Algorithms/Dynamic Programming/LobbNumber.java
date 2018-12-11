@@ -5,7 +5,14 @@ class LobbNumber {
      * and (m - n) closed parenthesis, to form the 
      * start of a valid sequence of balanced parenthesis 
      * 
-     * e.g. m = 3 n = 2
+     * e.g. n = 3 m = 2
+     * 
+     * 2 2 
+     * 4
+     * 0
+     * (( ()
+     * (() (
+     * () ((
      * 
      * m + n = 5 ( 
      * m - n = 1 )
@@ -44,7 +51,8 @@ class LobbNumber {
         System.out.println(n + " C " + r + ": " + C[n][r]);
         return C[n][r];
     }
+
     public static void main(String[] args) {
-        System.out.println("Lobb(3, 2): " + lobb(3, 2));
+        System.out.println("Lobb(3, 2): " + lobb(3, 0));
     }
 }
