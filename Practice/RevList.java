@@ -1,9 +1,5 @@
 class RevList {
-    //   
-    // H     L C 
-    // 4 3 2 1 X
-    // 1 2 3 4 5
-    // 2 1 
+
     public ListNode reverse(ListNode head, int k) {
         if (head == null) {
             return head;
