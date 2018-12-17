@@ -7,8 +7,10 @@ class PermutationCoefficient {
      * @return
      */
     static int permutation(int n, int k) {
-        if (k == 0 || n == 0) return 1;
-        return k * permutation(n - 1, k - 1) + permutation(n - 1, k);
+        if (n == 0 && k == 0) return 1;
+        if (n == 0 && k != 0) return 0;
+        if (k == 0) return 1;
+        return permutation(n - 1, k) + k * permutation(n - 1, k - 1);
     }
 
 
