@@ -19,10 +19,10 @@ class FindMotherVertex {
         graph.addEdge(v1, v2);
         graph.addEdge(v2, v3);
         graph.addEdge(v3, v1);
-        graph.addEdge(v1, v2);
         graph.addEdge(v1, v4);
         graph.addEdge(v4, v5);
 
+        graph.showAdjList();
         graph.dfs();
     }
 }
@@ -69,6 +69,16 @@ class Graph {
     public void resetNodes() {
         for (GraphVertex node : nodes) {
             node.visited = VertexState.UN_VISITED;
+        }
+    }
+
+    public void showAdjList() {
+        for (GraphVertex node : nodes) {
+            System.out.print(node.data + ":");
+            for (GraphVertex neighbour : node.neighbours) {
+                System.out.print(" => " + neighbour.data);
+            }
+            System.out.println(" => X");
         }
     }
 
