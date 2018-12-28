@@ -1,5 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.HashMap;
 
 class FindMotherVertex {
     public static void main(String[] args) {
@@ -24,6 +27,9 @@ class FindMotherVertex {
 
         graph.showAdjList();
         graph.dfs();
+
+        graph.transpose();
+        graph.showAdjList();
     }
 }
 
@@ -31,6 +37,16 @@ enum VertexState {
     UN_VISITED,
     VISITED,
     IN_PROCESS
+}
+
+class GraphEdge {
+    GraphVertex from;
+    GraphVertex to;
+
+    public GraphEdge(GraphVertex from, GraphVertex to) {
+        this.from = from;
+        this.to = to;
+    }
 }
 
 class GraphVertex {
@@ -47,6 +63,25 @@ class GraphVertex {
 
     public void addNeighbour(GraphVertex g) {
         this.neighbours.add(g);
+    }
+
+    public void removeNeighbour(GraphVertex g) {
+        this.neighbours.remove(g);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+
+        if (this == o) {
+            return true;
+        }
+
+        GraphVertex g = (GraphVertex) o;
+        if (this.data == g.data) {
+            return true;
+        }
+        return false;
     }
 }
 
@@ -66,6 +101,10 @@ class Graph {
         g1.addNeighbour(g2);
     }
 
+    public void removeEdge(GraphVertex g1, GraphVertex g2) {
+        g1.removeNeighbour(g2);
+    }
+
     public void resetNodes() {
         for (GraphVertex node : nodes) {
             node.visited = VertexState.UN_VISITED;
@@ -82,6 +121,25 @@ class Graph {
         }
     }
 
+    public void transpose() {
+        List<GraphEdge> edgesToBeRemoved = new ArrayList<>();
+        List<GraphEdge> edgesToBeAdded = new ArrayList<>();
+        for (GraphVertex node : nodes) {
+            for (GraphVertex neighbour : node.neighbours) {
+                edgesToBeAdded.add(new GraphEdge(neighbour, node));
+                edgesToBeRemoved.add(new GraphEdge(node, neighbour));
+            }
+        }
+
+        for (GraphEdge edge : edgesToBeRemoved) {
+            removeEdge(edge.from, edge.to);
+        }
+
+        for (GraphEdge edge : edgesToBeAdded) {
+            addEdge(edge.from, edge.to);
+        }
+    }
+
     public void dfs() {
         resetNodes();
         for (GraphVertex node : nodes) {
@@ -89,6 +147,7 @@ class Graph {
                 dfsUtil(node);
             }
         }
+        System.out.println();
     }
 
     private void dfsUtil(GraphVertex g) {
