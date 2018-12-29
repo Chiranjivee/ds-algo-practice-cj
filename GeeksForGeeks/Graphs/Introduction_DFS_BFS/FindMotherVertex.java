@@ -1,3 +1,4 @@
+import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,10 +27,8 @@ class FindMotherVertex {
         graph.addEdge(v4, v5);
 
         graph.showAdjList();
-        graph.dfs();
 
-        graph.transpose();
-        graph.showAdjList();
+        graph.findStronglyConnectedComponentsUsingKosaraju();
     }
 }
 
@@ -150,6 +149,18 @@ class Graph {
         System.out.println();
     }
 
+    public Stack<GraphVertex> dfsWithFinishTime() {
+        resetNodes();
+        Stack<GraphVertex> stack = new Stack<>();
+        for (GraphVertex node : nodes) {
+            if (node.visited == VertexState.UN_VISITED) {
+                dfsUtilWithFinishTime(node, stack);
+            }
+        }
+        System.out.println();
+        return stack;
+    }
+
     private void dfsUtil(GraphVertex g) {
         if (g.visited == VertexState.VISITED) {
             return;
@@ -159,11 +170,48 @@ class Graph {
         System.out.print(g.data + " ");
 
         for (GraphVertex neighbour : g.neighbours) {
-            if (g.visited == VertexState.UN_VISITED) {
+            if (neighbour.visited == VertexState.UN_VISITED) {
                 dfsUtil(neighbour);
-            }  
+            }
         }
 
         g.visited = VertexState.VISITED;
+    }
+
+    private void dfsUtilWithFinishTime(GraphVertex g, Stack<GraphVertex> stack) {
+        if (g.visited == VertexState.VISITED) {
+            return;
+        }
+
+        g.visited = VertexState.IN_PROCESS;
+        System.out.print(g.data + " ");
+
+        for (GraphVertex neighbour : g.neighbours) {
+            if (neighbour.visited == VertexState.UN_VISITED) {
+                dfsUtilWithFinishTime(neighbour, stack);
+            }
+        }
+
+        g.visited = VertexState.VISITED;
+        stack.push(g);
+    }
+
+    public void dfsFromStack(Stack<GraphVertex> stack) {
+        System.out.println("Strongly connected components are: ");
+        resetNodes();
+        while (!stack.isEmpty()) {
+            GraphVertex node = stack.pop();
+            if (node.visited == VertexState.UN_VISITED) {
+                dfsUtil(node);
+                System.out.println();
+            }
+        }
+    }
+
+    public void findStronglyConnectedComponentsUsingKosaraju() {
+        System.out.println("Finding strongly connected components");
+        Stack<GraphVertex> stack = dfsWithFinishTime();
+        this.transpose();
+        dfsFromStack(stack);
     }
 }
