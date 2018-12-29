@@ -211,7 +211,10 @@ class Graph {
     public void findStronglyConnectedComponentsUsingKosaraju() {
         System.out.println("Finding strongly connected components");
         Stack<GraphVertex> stack = dfsWithFinishTime();
-        this.transpose();
+        transpose();
         dfsFromStack(stack);
+
+        // transpose again to reset the graph to its original form
+        transpose();
     }
 }
