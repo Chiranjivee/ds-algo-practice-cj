@@ -20,6 +20,7 @@ class AreaOfTwoRectangles {
     public static void main(String[] args) {
         Rectangle rect1 = new Rectangle(1, 1, 3, 4);
         Rectangle rect2 = new Rectangle(2, 2, 5, 6);
+        System.out.println(getOverallArea(rect1, rect2));
     }
 }
 
