@@ -12,8 +12,8 @@ public class FindIndexes {
       	for (int i = 0; i < resultArr.length; i++) {
           	resultArr[i] = result.get(i);
         }
+
       	return resultArr;
-      	
 	}
   
   	public static void allIndexesUtil(int input[], int x, List<Integer> result, int i) {
