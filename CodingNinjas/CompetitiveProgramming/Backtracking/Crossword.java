@@ -1,5 +1,35 @@
 import java.util.*;
 public class Crossword {
+    /**
+     * 
+     * Sample test case:
+     * 
+     * INPUT: 
+        +-++++++++
+        +-++-+++++
+        +-------++
+        +-++-+++++
+        +-++-+++++
+        +-++-+++++
+        ++++-+++++
+        ++++-+++++
+        ++++++++++
+        ----------
+        CALIFORNIA;NIGERIA;CANADA;TELAVIV
+
+        OUTPUT: 
+        +C++++++++
+        +A++T+++++
+        +NIGERIA++
+        +A++L+++++
+        +D++A+++++
+        +A++V+++++
+        ++++I+++++
+        ++++V+++++
+        ++++++++++
+        CALIFORNIA
+     * @param args
+     */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
       	char [][] grid = new char[10][10];
