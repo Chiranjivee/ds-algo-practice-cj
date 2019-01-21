@@ -3,7 +3,7 @@ public class SudokuSolver {
         for (int i = 0; i < board[0].length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == 0) {
-                    // try filling the current block 
+                    // try filling the current block
                     for (int num = 1; num <= 9; num++) {
                         if (isNumSafe(board, i, j, num)) {
                             board[i][j] = num;
@@ -18,11 +18,11 @@ public class SudokuSolver {
                 }
             }
         }
-		
+
         return true;
     }
 
-    public static boolean isNumSafe(int [][] board, int i, int j, int num) {
+    public static boolean isNumSafe(int[][] board, int i, int j, int num) {
         // check in ith row
         for (int a = 0; a < 9; a++) {
             if (board[i][a] == num && a != j) {

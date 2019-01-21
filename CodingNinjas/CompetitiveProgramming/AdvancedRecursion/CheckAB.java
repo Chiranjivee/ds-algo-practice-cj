@@ -1,10 +1,11 @@
 public class CheckAB {
 
-	public static boolean checkAB(String input) {
+    public static boolean checkAB(String input) {
         if (input == null || input.length() == 0) {
             return false;
         }
-        if (input.charAt(0) != 'a') return false;
+        if (input.charAt(0) != 'a')
+            return false;
         return checkABUtil(input.substring(1), "a");
     }
 
@@ -14,21 +15,18 @@ public class CheckAB {
         }
 
         if ((prev == "a" || prev == "bb") && isPrefixA(input)) {
-          	return checkABUtil(input.substring(1), "a");
+            return checkABUtil(input.substring(1), "a");
         } else if (prev == "a" && isPrefixBB(input)) {
-          	return checkABUtil(input.substring(2), "bb");    
+            return checkABUtil(input.substring(2), "bb");
         }
         return false;
     }
-  
-  	private static boolean isPrefixBB(String input) {
-      	return 
-			input.length() >= 2 &&
-          	input.charAt(0) == 'b' &&
-          	input.charAt(1) == 'b';
+
+    private static boolean isPrefixBB(String input) {
+        return input.length() >= 2 && input.charAt(0) == 'b' && input.charAt(1) == 'b';
     }
-  
-  	private static boolean isPrefixA(String input) {
-      	return input.charAt(0) == 'a';
+
+    private static boolean isPrefixA(String input) {
+        return input.charAt(0) == 'a';
     }
 }
