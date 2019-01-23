@@ -1,6 +1,6 @@
 import java.util.Arrays;
 public class CountInversions {
-	long solve(int[] A,int n){
+	long solve(int[] A,int n) {
 		if (n == 0 || n == 1) {
             return 0;
         }
@@ -13,7 +13,7 @@ public class CountInversions {
         
         long leftInversions = solveDivide(A, start, mid);
         long rightInversions = solveDivide(A, mid + 1, end);
-        
+
         long mergeInversions = solveMerge(A, start, mid, end);
         return leftInversions + rightInversions + mergeInversions;
     }
