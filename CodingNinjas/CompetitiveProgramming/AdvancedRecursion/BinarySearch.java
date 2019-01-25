@@ -1,24 +1,43 @@
 public class BinarySearch {
 
-	// element - number to be searched
-	public static int binarySearch(int input[], int element) {
-		// Write your code here
-		return binarySearch(input, 0, input.length - 1, element);
-	}
-
-	public static int binarySearch(int input[], int start, int end, int element) {
+	public static int binarySearch(int [] array, int start, int end, int key) {
 		if (start > end) {
-			return -1;
+			return -(start + 1);
 		}
 
 		int mid = start + (end - start) / 2;
-		if (input[mid] == element) {
+
+		if (array[mid] == key) {
 			return mid;
 		}
 
-		return 
-			input[mid] > element ?
-				binarySearch(input, start, mid - 1, element):
-				binarySearch(input, mid + 1, end, element);
+		return array[mid] > key ? 
+			binarySearch(array, start, mid - 1, key):
+			binarySearch(array, mid + 1, end, key);
+	}
+
+	public static int binarySearchIterative(int[] array, int key) {
+		int start = 0;
+		int end = array.length;
+		while (start <= end) {
+			int mid = start + (end - start) / 2;
+			if (array[mid] == key) {
+				return mid;
+			} else if (array[mid] > key) {
+				end = mid - 1;
+			} else {
+				start = mid + 1;
+			}
+		}
+
+		return -(start + 1);
+	}
+
+	public static void main(String[] args) {
+		int [] arr = { 10, 20, 30, 40, 50 };
+		int idx = binarySearch(arr, 0, arr.length - 1, 23);
+		System.out.println(idx);
+		idx = binarySearchIterative(arr, 23);
+		System.out.println(idx);
 	}
 }
