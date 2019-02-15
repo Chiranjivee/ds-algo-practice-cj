@@ -1,10 +1,7 @@
-import java.util.Scanner;
-import java.util.Arrays;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class RoyAndCoinBoxes {
@@ -76,9 +73,10 @@ public class RoyAndCoinBoxes {
     public static void main(String[] args) throws IOException {
         Reader sc = new Reader();
         int n = sc.nextInt();
-        int[] arr = new int[n + 2];
-        int[] count = new int[n + 1];
         int lr = sc.nextInt();
+        int[] arr = new int[n + 2];
+        int[] count = new int[lr + 1];
+        
 
         for (int i = 0; i < lr; i++) {
             int l = sc.nextInt();
@@ -91,14 +89,14 @@ public class RoyAndCoinBoxes {
             arr[i] += arr[i - 1];
             count[arr[i]]++;
         }
-        for (int i = n - 1; i >= 1; i--) {
+        for (int i = lr - 1; i >= 1; i--) {
             count[i] += count[i + 1];
         }
 
         int q = sc.nextInt();
         for (int j = 0; j < q; j++) {
             int curr = sc.nextInt();
-            System.out.println(curr > n ? 0 : count[curr]);
+            System.out.println(curr > lr ? 0 : count[curr]);
         }
     }
 }
