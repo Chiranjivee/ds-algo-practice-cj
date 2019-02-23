@@ -1,142 +1,81 @@
 import java.util.Scanner;
-import java.io.DataInputStream; 
-import java.io.FileInputStream; 
-import java.io.IOException; 
+import java.util.Arrays;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.BufferedReader; 
 import java.io.InputStreamReader; 
 import java.util.Scanner; 
-import java.util.StringTokenizer;
+import java.util.StringTokenizer; 
 
-public class MaximumPairSum {
-    static class Reader { 
-        final private int BUFFER_SIZE = 1 << 16; 
-        private DataInputStream din; 
-        private byte[] buffer; 
-        private int bufferPointer, bytesRead; 
+public class Main {
+	static class FastReader { 
+        BufferedReader br; 
+        StringTokenizer st; 
   
-        public Reader() { 
-            din = new DataInputStream(System.in); 
-            buffer = new byte[BUFFER_SIZE]; 
-            bufferPointer = bytesRead = 0; 
+        public FastReader() 
+        { 
+            br = new BufferedReader(new InputStreamReader(System.in)); 
         } 
   
-        public Reader(String file_name) throws IOException 
+        String next() 
         { 
-            din = new DataInputStream(new FileInputStream(file_name)); 
-            buffer = new byte[BUFFER_SIZE]; 
-            bufferPointer = bytesRead = 0; 
-        } 
-  
-        public String readWord() throws IOException 
-        { 
-            byte[] buf = new byte[64]; // line length 
-            int cnt = 0, c; 
-            while ((c = read()) != -1) 
+            while (st == null || !st.hasMoreElements()) 
             { 
-                if (c == ' ') 
-                    break; 
-                buf[cnt++] = (byte) c; 
-            } 
-            return new String(buf, 0, cnt); 
-        } 
-  
-        public int nextInt() throws IOException 
-        { 
-            int ret = 0; 
-            byte c = read(); 
-            while (c <= ' ') 
-                c = read(); 
-            boolean neg = (c == '-'); 
-            if (neg) 
-                c = read(); 
-            do
-            { 
-                ret = ret * 10 + c - '0'; 
-            }  while ((c = read()) >= '0' && c <= '9'); 
-  
-            if (neg) 
-                return -ret; 
-            return ret; 
-        } 
-  
-        public long nextLong() throws IOException 
-        { 
-            long ret = 0; 
-            byte c = read(); 
-            while (c <= ' ') 
-                c = read(); 
-            boolean neg = (c == '-'); 
-            if (neg) 
-                c = read(); 
-            do { 
-                ret = ret * 10 + c - '0'; 
-            } 
-            while ((c = read()) >= '0' && c <= '9'); 
-            if (neg) 
-                return -ret; 
-            return ret; 
-        } 
-  
-        public double nextDouble() throws IOException 
-        { 
-            double ret = 0, div = 1; 
-            byte c = read(); 
-            while (c <= ' ') 
-                c = read(); 
-            boolean neg = (c == '-'); 
-            if (neg) 
-                c = read(); 
-  
-            do { 
-                ret = ret * 10 + c - '0'; 
-            } 
-            while ((c = read()) >= '0' && c <= '9'); 
-  
-            if (c == '.') 
-            { 
-                while ((c = read()) >= '0' && c <= '9') 
+                try
                 { 
-                    ret += (c - '0') / (div *= 10); 
+                    st = new StringTokenizer(br.readLine()); 
+                } 
+                catch (IOException  e) 
+                { 
+                    e.printStackTrace(); 
                 } 
             } 
-  
-            if (neg) 
-                return -ret; 
-            return ret; 
+            return st.nextToken(); 
         } 
   
-        private void fillBuffer() throws IOException 
+        int nextInt() 
         { 
-            bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE); 
-            if (bytesRead == -1) 
-                buffer[0] = -1; 
+            return Integer.parseInt(next()); 
         } 
   
-        private byte read() throws IOException 
+        long nextLong() 
         { 
-            if (bufferPointer == bytesRead) 
-                fillBuffer(); 
-            return buffer[bufferPointer++]; 
+            return Long.parseLong(next()); 
         } 
   
-        public void close() throws IOException 
+        double nextDouble() 
         { 
-            if (din == null) 
-                return; 
-            din.close(); 
+            return Double.parseDouble(next()); 
+        } 
+  
+        String nextLine() 
+        { 
+            String str = ""; 
+            try
+            { 
+                str = br.readLine(); 
+            } 
+            catch (IOException e) 
+            { 
+                e.printStackTrace(); 
+            } 
+            return str; 
         } 
     }
 	
 	public static void main(String[] args) throws IOException {
-		Reader sc = new Reader();
+		FastReader sc = new FastReader();
       	int n = sc.nextInt();
       	
       	int [] arr = new int [n];
-      	TreeNode [] tree = new TreeNode[4 * n];
+      	TreeNode [] tree = new TreeNode[3 * n];
+      	for(int i = 0; i < tree.length; i++) tree[i] = new TreeNode();
       	for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
         buildTree(arr, tree, 0, n - 1, 1);
         int q = sc.nextInt();
       	for (int i = 0; i < q; i++) {
-          	char qu = sc.readWord().charAt(0);
+          	char qu = sc.next().charAt(0);
           	int l = sc.nextInt();
           	int r = sc.nextInt();
           
@@ -151,28 +90,23 @@ public class MaximumPairSum {
 
   	public static void buildTree(int[] arr, TreeNode [] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
-            TreeNode node = new TreeNode();
-            node.max = arr[start];
-            node.secondMax = Integer.MIN_VALUE;
-            tree[treeNodeIdx] = node;
+            tree[treeNodeIdx].max = arr[start];
+            tree[treeNodeIdx].secondMax = Integer.MIN_VALUE;
             return;
         }
 
         int mid = (start + end) / 2;
 
         buildTree(arr, tree, start, mid, 2 * treeNodeIdx);
-        buildTree(arr, tree, mid + 1, end, 2 * treeNodeIdx + 1);
+        buildTree(arr, tree, mid + 1, end, (2 * treeNodeIdx) + 1);
 
-        TreeNode res = new TreeNode();
         TreeNode left = tree[2 * treeNodeIdx];
-        TreeNode right = tree[2 * treeNodeIdx + 1];
-        res.max = Math.max(left.max, right.max);
-        res.secondMax = Math.min(
+        TreeNode right = tree[(2 * treeNodeIdx) + 1];
+        tree[treeNodeIdx].max = Math.max(left.max, right.max);
+        tree[treeNodeIdx].secondMax = Math.min(
             Math.max(left.max, right.secondMax),
-            Math.max(left.secondMax, right.max)
+            Math.max(right.max, left.secondMax)
         );
-
-        tree[treeNodeIdx] = res;
     }
 
     public static TreeNode query(TreeNode [] tree, int start, int end, int left, int right, int treeNodeIdx) {
@@ -189,44 +123,38 @@ public class MaximumPairSum {
         // Partially inside and partially outside.
         int mid = (start + end) / 2;
         TreeNode option1 = query(tree, start, mid, left, right, 2 * treeNodeIdx);
-        TreeNode option2 = query(tree, mid + 1, end, left, right, 2 * treeNodeIdx + 1);
+        TreeNode option2 = query(tree, mid + 1, end, left, right, (2 * treeNodeIdx) + 1);
 
         TreeNode res = new TreeNode();
         res.max = Math.max(option1.max, option2.max);
         res.secondMax = Math.min(
             Math.max(option1.max, option2.secondMax),
-            Math.max(option1.secondMax, option2.max)
+            Math.max(option2.max, option1.secondMax)
         );
         return res;
     }
 
     public static void updateTree(int [] arr, TreeNode [] tree, int element, int index, int start, int end, int treeNodeIdx) {
         if (start == end) {
-            arr[index] = element;
-            TreeNode node = new TreeNode();
-            node.max = element;
-            node.secondMax = Integer.MIN_VALUE;
-            tree[treeNodeIdx] = node;
+            tree[treeNodeIdx].max = element;
+            tree[treeNodeIdx].secondMax = Integer.MIN_VALUE;
             return;
         }
 
         int mid = (start + end) / 2;
         if (index > mid) {
-            updateTree(arr, tree, element, index, mid + 1, end, 2 * treeNodeIdx + 1);
+            updateTree(arr, tree, element, index, mid + 1, end, (2 * treeNodeIdx) + 1);
         } else {
             updateTree(arr, tree, element, index, start, mid, 2 * treeNodeIdx);
         }
 
-        TreeNode res = new TreeNode();
         TreeNode left = tree[2 * treeNodeIdx];
-        TreeNode right = tree[2 * treeNodeIdx + 1];
-        res.max = Math.max(left.max, right.max);
-        res.secondMax = Math.min(
+        TreeNode right = tree[(2 * treeNodeIdx) + 1];
+        tree[treeNodeIdx].max = Math.max(left.max, right.max);
+        tree[treeNodeIdx].secondMax = Math.min(
             Math.max(left.max, right.secondMax),
-            Math.max(left.secondMax, right.max)
+            Math.max(right.max, left.secondMax)
         );
-
-        tree[treeNodeIdx] = res;
     }
 
 }
