@@ -4,7 +4,7 @@ public class Solution {
 
 	public static int knapsack(int[] weight,int value[],int maxWeight) {
       	int n = weight.length;
-		int [][] dp = new int[n + 1][maxWeight + 1];
+				int [][] dp = new int[n + 1][maxWeight + 1];
       	for (int i = 0; i <= n; i++) {
           	Arrays.fill(dp[i], -1);
         }
@@ -28,5 +28,17 @@ public class Solution {
           	dp[n][maxWeight] = knapsack(weight, value, maxWeight, n - 1, dp);
         }
       	return dp[n][maxWeight];
-    }
+		}
+
+		public static int knapsackIterative(int [] weight, int [] value, int maxWeight, int n) {
+			int [] dp = new int[maxWeight + 1];
+			int [] temp = new int[maxWeight + 1];
+			for (int j = 0; j < n; j++) {
+					for (int i = maxWeight; i >= weight[j]; i--) {
+						dp[i] = Math.max(dp[i], value[j] + dp[i - weight[j]]);
+					}
+			}
+		
+			return dp[maxWeight];
+		}
 }
