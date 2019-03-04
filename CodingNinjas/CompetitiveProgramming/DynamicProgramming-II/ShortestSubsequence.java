@@ -2,14 +2,14 @@
 public class ShortestSubsequence {
 	static int MAX = 1000000000;
 	public int solve(String S,String V){
-      	 int m = S.length();
-      	 int n = V.length();
-            int [][] dp = new int[m + 1][n + 1];
-         int ans = solveUtil(S,V,0,0, dp);
-         if (ans == m) {
-             return MAX;
-         }
-         return ans;
+      	int m = S.length();
+      	int n = V.length();
+        int [][] dp = new int[m + 1][n + 1];
+        int ans = solveUtil(S,V,0,0, dp);
+        if (ans == m) {
+            return MAX;
+        }
+        return ans;
 	}
     
     public int solveUtil(String s, String v, int sIdx, int vIdx, int [][] dp) {
