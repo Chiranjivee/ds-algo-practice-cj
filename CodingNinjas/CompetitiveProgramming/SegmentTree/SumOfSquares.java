@@ -3,87 +3,74 @@ import java.util.Arrays;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.BufferedReader; 
-import java.io.InputStreamReader; 
-import java.util.StringTokenizer; 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 class Main {
-	static class FastReader { 
-        BufferedReader br; 
-        StringTokenizer st; 
-  
-        public FastReader() 
-        { 
-            br = new BufferedReader(new InputStreamReader(System.in)); 
-        } 
-  
-        String next() 
-        { 
-            while (st == null || !st.hasMoreElements()) 
-            { 
-                try
-                { 
-                    st = new StringTokenizer(br.readLine()); 
-                } 
-                catch (IOException  e) 
-                { 
-                    e.printStackTrace(); 
-                } 
-            } 
-            return st.nextToken(); 
-        } 
-  
-        int nextInt() 
-        { 
-            return Integer.parseInt(next()); 
-        } 
-  
-        long nextLong() 
-        { 
-            return Long.parseLong(next()); 
-        } 
-  
-        double nextDouble() 
-        { 
-            return Double.parseDouble(next()); 
-        } 
-  
-        String nextLine() 
-        { 
-            String str = ""; 
-            try
-            { 
-                str = br.readLine(); 
-            } 
-            catch (IOException e) 
-            { 
-                e.printStackTrace(); 
-            } 
-            return str; 
-        } 
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
     }
-	
-	public static void main(String[] args) throws IOException {
-		FastReader in = new FastReader();
-      	// Write your code here
+
+    public static void main(String[] args) throws IOException {
+        FastReader in = new FastReader();
+        // Write your code here
         int t = in.nextInt();
         int r = 0;
         while (r++ < t) {
             System.out.println("Case " + r + ":");
             int n = in.nextInt();
             int q = in.nextInt();
-            
-            int [] arr = new int[n];
-            for (int i = 0; i < n;i++){
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
                 arr[i] = in.nextInt();
             }
-            
-            TreeNode [] tree = new TreeNode[4 * n];
+
+            TreeNode[] tree = new TreeNode[4 * n];
             buildTree(arr, tree, 0, n - 1, 1);
-            LazyTreeNode [] lazy = new LazyTreeNode[4 * n];
+            LazyTreeNode[] lazy = new LazyTreeNode[4 * n];
 
             while (q-- > 0) {
-                
+
                 int type = in.nextInt();
                 if (type == 0) {
                     int st = in.nextInt();
@@ -102,9 +89,9 @@ class Main {
                 }
             }
         }
-	}
+    }
 
-  	public static void buildTree(int[] arr, TreeNode [] tree, int start, int end, int treeNodeIdx) {
+    public static void buildTree(int[] arr, TreeNode[] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
             tree[treeNodeIdx] = new TreeNode();
             tree[treeNodeIdx].sum = arr[start];
@@ -124,12 +111,8 @@ class Main {
         tree[treeNodeIdx].sqSum = left.sqSum + right.sqSum;
     }
 
-    public static void update(
-        TreeNode [] tree, LazyTreeNode [] lazy, 
-        int low, int high, 
-        int startR, int endR, long element, 
-        int currentPosition, int type)
-    {
+    public static void update(TreeNode[] tree, LazyTreeNode[] lazy, int low, int high, int startR, int endR,
+            long element, int currentPosition, int type) {
 
         if (low > high) {
             return;
@@ -137,11 +120,13 @@ class Main {
 
         if (lazy[currentPosition] != null && lazy[currentPosition].type != -1) {
             if (lazy[currentPosition].type == 1) {
-                tree[currentPosition].sqSum += lazy[currentPosition].value * lazy[currentPosition].value * (high - low + 1); 
+                tree[currentPosition].sqSum += lazy[currentPosition].value * lazy[currentPosition].value
+                        * (high - low + 1);
                 tree[currentPosition].sqSum += 2 * lazy[currentPosition].value * tree[currentPosition].sum;
                 tree[currentPosition].sum += lazy[currentPosition].value * (high - low + 1);
             } else if (lazy[currentPosition].type == 0) {
-                tree[currentPosition].sqSum = lazy[currentPosition].value * lazy[currentPosition].value * (high - low + 1);
+                tree[currentPosition].sqSum = lazy[currentPosition].value * lazy[currentPosition].value
+                        * (high - low + 1);
                 tree[currentPosition].sum = lazy[currentPosition].value * (high - low + 1);
             }
 
@@ -165,13 +150,12 @@ class Main {
 
         // complete overlap
         if (startR <= low && high <= endR) {
-            
+            // Update by increment.
             if (type == 1) {
-                // Update by increment.
                 tree[currentPosition].sqSum += (element * element) * (high - low + 1);
                 tree[currentPosition].sqSum += (2 * tree[currentPosition].sum * element);
                 tree[currentPosition].sum += (element * (high - low + 1));
-                
+
                 if (low != high) {
                     lazy[currentPosition * 2] = new LazyTreeNode();
                     lazy[currentPosition * 2].type = 1;
@@ -181,13 +165,13 @@ class Main {
                     lazy[currentPosition * 2 + 1].type = 1;
                     lazy[currentPosition * 2 + 1].value = element;
                 }
-            } else if (type == 0) {
-                // Update by value.
+            }
+            // Update by value.
+            else if (type == 0) {
                 tree[currentPosition] = new TreeNode();
                 tree[currentPosition].sqSum += (element * element * (high - low + 1));
                 tree[currentPosition].sum += (element * (high - low + 1));
-                
-                
+
                 if (low != high) {
                     lazy[currentPosition * 2] = new LazyTreeNode();
                     lazy[currentPosition * 2].type = 0;
@@ -208,43 +192,40 @@ class Main {
         tree[currentPosition].sum = tree[2 * currentPosition].sum + tree[2 * currentPosition + 1].sum;
         tree[currentPosition].sqSum = tree[2 * currentPosition].sqSum + tree[2 * currentPosition + 1].sqSum;
     }
-    
 
-    public static TreeNode query(
-        TreeNode [] tree, LazyTreeNode [] lazy,
-        int low, int high,
-        int startR, int endR, 
-        int currentPosition) 
-    {
+    public static TreeNode query(TreeNode[] tree, LazyTreeNode[] lazy, int low, int high, int startR, int endR,
+            int currentPosition) {
         if (lazy[currentPosition] != null && lazy[currentPosition].type != -1) {
-          if (lazy[currentPosition].type == 1) {
-            // Update by incriment
-            tree[currentPosition].sqSum += 
-                ((lazy[currentPosition].value * lazy[currentPosition].value) * (high - low + 1)
-                 + (2 * lazy[currentPosition].value * tree[currentPosition].sum));
+            if (lazy[currentPosition].type == 1) {
+                // Update by incriment
+                tree[currentPosition].sqSum += ((lazy[currentPosition].value * lazy[currentPosition].value)
+                        * (high - low + 1) + (2 * lazy[currentPosition].value * tree[currentPosition].sum));
 
-            tree[currentPosition].sum += (lazy[currentPosition].value * (high - low + 1));
-          } else if (lazy[currentPosition].type == 0) {
-            // Update by value.
-            tree[currentPosition].sqSum = (lazy[currentPosition].value * lazy[currentPosition].value * (high - low + 1));
-            tree[currentPosition].sum = (lazy[currentPosition].value * (high - low + 1));
-          }
+                tree[currentPosition].sum += (lazy[currentPosition].value * (high - low + 1));
+            } else if (lazy[currentPosition].type == 0) {
+                // Update by value.
+                tree[currentPosition].sqSum = (lazy[currentPosition].value * lazy[currentPosition].value
+                        * (high - low + 1));
+                tree[currentPosition].sum = (lazy[currentPosition].value * (high - low + 1));
+            }
 
-          if (high != low) {
-            lazy[2 * currentPosition] = new LazyTreeNode();
-            lazy[2 * currentPosition].type = lazy[currentPosition].type;
-            lazy[2 * currentPosition].value = lazy[currentPosition].value;
+            if (high != low) {
+                lazy[2 * currentPosition] = new LazyTreeNode();
+                lazy[2 * currentPosition].type = lazy[currentPosition].type;
+                lazy[2 * currentPosition].value = lazy[currentPosition].value;
 
-            lazy[(2 * currentPosition) + 1] = new LazyTreeNode();
-            lazy[(2 * currentPosition) + 1].type = lazy[currentPosition].type;
-            lazy[(2 * currentPosition) + 1].value = lazy[currentPosition].value;
-          }
-          lazy[currentPosition] = null;
+                lazy[(2 * currentPosition) + 1] = new LazyTreeNode();
+                lazy[(2 * currentPosition) + 1].type = lazy[currentPosition].type;
+                lazy[(2 * currentPosition) + 1].value = lazy[currentPosition].value;
+            }
+            lazy[currentPosition] = null;
         }
         // Fully outside
-        if (startR > high || endR < low) return new TreeNode();
+        if (startR > high || endR < low)
+            return new TreeNode();
         // Fully overlap
-        if (startR <= low && high <= endR) return tree[currentPosition];
+        if (startR <= low && high <= endR)
+            return tree[currentPosition];
 
         // Partially overlap
         int mid = (low + high) / 2;
@@ -260,7 +241,7 @@ class Main {
 class TreeNode {
     long sum = 0;
     long sqSum = 0;
-    
+
     @Override
     public String toString() {
         return this.sum + " " + this.sqSum;
