@@ -1,30 +1,31 @@
 import java.util.Scanner;
 import java.util.Arrays;
+
 public class MinimumInSubArray {
-	
-  	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-      	int n = sc.nextInt();
-      	int q = sc.nextInt();
-      	int [] arr = new int [n];
-      	int [] tree = new int[4 * n];
-      	for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
-      	buildTree(arr, tree, 0, n - 1, 1);
-      	for (int i = 0; i < q; i++) {
-          	String qu = sc.next();
-          	int l = sc.nextInt();
-          	int r = sc.nextInt();
-          
-          	if ("q".equals(qu)) {
-              	int res = query(tree, 0, n - 1, l - 1, r - 1, 1);
-              	System.out.println(res);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int q = sc.nextInt();
+        int[] arr = new int[n];
+        int[] tree = new int[4 * n];
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+        buildTree(arr, tree, 0, n - 1, 1);
+        for (int i = 0; i < q; i++) {
+            String qu = sc.next();
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+
+            if ("q".equals(qu)) {
+                int res = query(tree, 0, n - 1, l - 1, r - 1, 1);
+                System.out.println(res);
             } else if ("u".equals(qu)) {
-              	updateTree(arr, tree, r, l - 1, 0, n - 1, 1);
+                updateTree(arr, tree, r, l - 1, 0, n - 1, 1);
             }
         }
-	}
+    }
 
-  	public static void buildTree(int[] arr, int [] tree, int start, int end, int treeNodeIdx) {
+    public static void buildTree(int[] arr, int[] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
             tree[treeNodeIdx] = arr[start];
             return;
@@ -38,7 +39,7 @@ public class MinimumInSubArray {
         tree[treeNodeIdx] = Math.min(tree[2 * treeNodeIdx], tree[2 * treeNodeIdx + 1]);
     }
 
-    public static int query(int [] tree, int start, int end, int left, int right, int treeNodeIdx) {
+    public static int query(int[] tree, int start, int end, int left, int right, int treeNodeIdx) {
         // Completely outside the given range.
         if (start > right || end < left) {
             return Integer.MAX_VALUE;
@@ -57,7 +58,7 @@ public class MinimumInSubArray {
         return Math.min(option1, option2);
     }
 
-    public static void updateTree(int [] arr, int [] tree, int element, int index, int start, int end, int treeNodeIdx) {
+    public static void updateTree(int[] arr, int[] tree, int element, int index, int start, int end, int treeNodeIdx) {
         if (start == end) {
             arr[index] = element;
             tree[treeNodeIdx] = element;

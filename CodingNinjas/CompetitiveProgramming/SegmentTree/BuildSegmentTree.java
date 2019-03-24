@@ -1,7 +1,8 @@
 import java.util.Arrays;
+
 class BuildSegmentTree {
     public static void main(String[] args) {
-        int arr[] = new int[] {1, 2, 3, 4, 5};
+        int arr[] = new int[] { 1, 2, 3, 4, 5 };
         int tree[] = new int[10]; // double the array size.
 
         buildTree(arr, tree, 0, 4, 1);
@@ -17,7 +18,7 @@ class BuildSegmentTree {
         int ans = query(tree, 0, 4, 1, 2, 1);
     }
 
-    public static void buildTree(int[] arr, int [] tree, int start, int end, int treeNodeIdx) {
+    public static void buildTree(int[] arr, int[] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
             tree[treeNodeIdx] = arr[start];
             return;
@@ -31,7 +32,7 @@ class BuildSegmentTree {
         tree[treeNodeIdx] = tree[2 * treeNodeIdx] + tree[2 * treeNodeIdx + 1];
     }
 
-    public static int query(int [] tree, int start, int end, int left, int right, int treeNodeIdx) {
+    public static int query(int[] tree, int start, int end, int left, int right, int treeNodeIdx) {
         // Completely outside the given range.
         if (start > right || end < left) {
             return 0;
@@ -50,7 +51,7 @@ class BuildSegmentTree {
         return option1 + option2;
     }
 
-    public static void updateTree(int [] arr, int [] tree, int element, int index, int start, int end, int treeNodeIdx) {
+    public static void updateTree(int[] arr, int[] tree, int element, int index, int start, int end, int treeNodeIdx) {
         if (start == end) {
             arr[index] = element;
             tree[treeNodeIdx] = element;

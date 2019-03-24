@@ -21,7 +21,7 @@ class Graph {
     }
 
     public boolean breadthFirstSearch(int s) {
-        boolean [] visited = new boolean [this.V];
+        boolean[] visited = new boolean[this.V];
 
         LinkedList<Integer> queue = new LinkedList<>();
         visited[s] = true;
@@ -31,7 +31,7 @@ class Graph {
             s = queue.poll();
             count++;
             Iterator<Integer> iter = adjList[s].listIterator();
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 int n = iter.next();
                 if (!visited[n]) {
                     visited[n] = true;
@@ -43,18 +43,17 @@ class Graph {
     }
 }
 
-
 public class Solution {
-	public static void main(String[] args) {
-		Scanner s = new Scanner(System.in);
-		int V = s.nextInt();
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int V = s.nextInt();
         Graph graph = new Graph(V);
-		int E = s.nextInt();
+        int E = s.nextInt();
 
         while (E-- > 0) {
             graph.addEdge(s.nextInt(), s.nextInt());
         }
-        
+
         System.out.println(graph.breadthFirstSearch(0));
     }
 }

@@ -7,11 +7,11 @@ public class Solution {
         }
         int x = balancedTreesOfHeightH(height - 1);
         int y = balancedTreesOfHeightH(height - 2);
-  
-      	long ans1 = (long) x * x;
-      	int ans1Mod = (int) (ans1 % m);
-      	long ans2 = (long) x * y * 2;
-      	int ans2Mod = (int) (ans2 % m);
-      	return (ans1Mod + ans2Mod) % m;
+
+        long ans1 = (long) x * x;
+        int ans1Mod = (int) (ans1 % m);
+        long ans2 = (long) x * y * 2;
+        int ans2Mod = (int) (ans2 % m);
+        return (ans1Mod + ans2Mod) % m;
     }
 }

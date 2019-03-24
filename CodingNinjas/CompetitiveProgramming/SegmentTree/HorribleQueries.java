@@ -2,16 +2,16 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class HorribleQueries {
-	public static void main(String[] args) {
-		// Write your code here
+    public static void main(String[] args) {
+        // Write your code here
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
         while (t-- > 0) {
             int n = in.nextInt();
             int c = in.nextInt();
-            
-            long [] tree = new long[4 * n];
-            long [] lazy = new long[4 * n];
+
+            long[] tree = new long[4 * n];
+            long[] lazy = new long[4 * n];
 
             while (c-- > 0) {
                 int type = in.nextInt();
@@ -29,13 +29,10 @@ public class HorribleQueries {
         }
 
         in.close();
-	}
+    }
 
-    public static void update(
-        long [] tree, long [] lazy, 
-        int low, int high, 
-        int startR, int endR, long element, 
-        int currentPosition) {
+    public static void update(long[] tree, long[] lazy, int low, int high, int startR, int endR, long element,
+            int currentPosition) {
         if (low > high) {
             return;
         }
@@ -73,12 +70,7 @@ public class HorribleQueries {
         tree[currentPosition] = tree[2 * currentPosition] + tree[2 * currentPosition + 1];
     }
 
-    public static long query(
-        long [] tree, long [] lazy,
-        int low, int high,
-        int startR, int endR, 
-        int currentPosition) 
-    {
+    public static long query(long[] tree, long[] lazy, int low, int high, int startR, int endR, int currentPosition) {
         if (lazy[currentPosition] != 0) {
             tree[currentPosition] += (lazy[currentPosition] * (high - low + 1));
             if (low != high) {

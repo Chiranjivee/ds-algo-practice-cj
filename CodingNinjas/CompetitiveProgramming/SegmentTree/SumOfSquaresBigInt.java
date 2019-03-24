@@ -4,84 +4,72 @@ import java.util.Arrays;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.BufferedReader; 
-import java.io.InputStreamReader; 
-import java.util.StringTokenizer; 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 class Main {
     static BigInteger TWO = BigInteger.valueOf(2);
-	static class FastReader { 
-        BufferedReader br; 
-        StringTokenizer st; 
-  
-        public FastReader() 
-        { 
-            br = new BufferedReader(new InputStreamReader(System.in)); 
-        } 
-  
-        String next() 
-        { 
-            while (st == null || !st.hasMoreElements()) 
-            { 
-                try
-                { 
-                    st = new StringTokenizer(br.readLine()); 
-                } 
-                catch (IOException  e) 
-                { 
-                    e.printStackTrace(); 
-                } 
-            } 
-            return st.nextToken(); 
-        } 
-  
-        int nextInt() 
-        { 
-            return Integer.parseInt(next()); 
-        } 
-  
-        long nextLong() 
-        { 
-            return Long.parseLong(next()); 
-        } 
-  
-        double nextDouble() 
-        { 
-            return Double.parseDouble(next()); 
-        } 
-  
-        String nextLine() 
-        { 
-            String str = ""; 
-            try
-            { 
-                str = br.readLine(); 
-            } 
-            catch (IOException e) 
-            { 
-                e.printStackTrace(); 
-            } 
-            return str; 
-        } 
+
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
     }
-	
-	public static void main(String[] args) throws IOException {
-		FastReader in = new FastReader();
+
+    public static void main(String[] args) throws IOException {
+        FastReader in = new FastReader();
         int t = in.nextInt();
         int r = 0;
         while (r++ < t) {
             System.out.println("Case " + r + ":");
             int n = in.nextInt();
             int q = in.nextInt();
-            
-            int [] arr = new int[n];
-            for (int i = 0; i < n;i++){
+
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
                 arr[i] = in.nextInt();
             }
-            
-            TreeNode [] tree = new TreeNode[4 * n];
+
+            TreeNode[] tree = new TreeNode[4 * n];
             buildTree(arr, tree, 0, n - 1, 1);
-            LazyTreeNode [] lazy = new LazyTreeNode[4 * n];
+            LazyTreeNode[] lazy = new LazyTreeNode[4 * n];
 
             while (q-- > 0) {
                 int type = in.nextInt();
@@ -102,9 +90,9 @@ class Main {
                 }
             }
         }
-	}
+    }
 
-  	public static void buildTree(int[] arr, TreeNode [] tree, int start, int end, int treeNodeIdx) {
+    public static void buildTree(int[] arr, TreeNode[] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
             tree[treeNodeIdx] = new TreeNode();
             BigInteger temp = BigInteger.valueOf(arr[start]);
@@ -125,12 +113,8 @@ class Main {
         tree[treeNodeIdx].sqSum = left.sqSum.add(right.sqSum);
     }
 
-    public static void update(
-        TreeNode [] tree, LazyTreeNode [] lazy, 
-        int low, int high, 
-        int startR, int endR, long element, 
-        int currentPosition, int type)
-    {
+    public static void update(TreeNode[] tree, LazyTreeNode[] lazy, int low, int high, int startR, int endR,
+            long element, int currentPosition, int type) {
         if (low > high) {
             return;
         }
@@ -140,26 +124,17 @@ class Main {
 
         if (lazy[currentPosition] != null && lazy[currentPosition].type != -1) {
             if (lazy[currentPosition].type == 1) {
-                
+
                 BigInteger temp = lazy[currentPosition].value.multiply(tree[currentPosition].sum).multiply(TWO);
-                
-                tree[currentPosition].sqSum = 
-                    tree[currentPosition].sqSum
-                    .add(
-                        lazy[currentPosition].value
-                        .multiply(lazy[currentPosition].value)
-                        .multiply(highLowDiffBigInt))
-                    .add(temp);
-                    
-                tree[currentPosition].sum = 
-                    tree[currentPosition].sum
-                    .add(
-                        lazy[currentPosition].value
-                            .multiply(highLowDiffBigInt));
+
+                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(
+                        lazy[currentPosition].value.multiply(lazy[currentPosition].value).multiply(highLowDiffBigInt))
+                        .add(temp);
+
+                tree[currentPosition].sum = tree[currentPosition].sum
+                        .add(lazy[currentPosition].value.multiply(highLowDiffBigInt));
             } else if (lazy[currentPosition].type == 0) {
-                tree[currentPosition].sqSum = 
-                    lazy[currentPosition].value
-                        .multiply(lazy[currentPosition].value)
+                tree[currentPosition].sqSum = lazy[currentPosition].value.multiply(lazy[currentPosition].value)
                         .multiply(highLowDiffBigInt);
 
                 tree[currentPosition].sum = lazy[currentPosition].value.multiply(highLowDiffBigInt);
@@ -187,16 +162,19 @@ class Main {
         if (startR <= low && high <= endR) {
             if (type == 1) {
                 // Update by increment.
-                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(elementBigInt.multiply(elementBigInt).multiply(highLowDiffBigInt));
-                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(tree[currentPosition].sum.multiply(elementBigInt).multiply(TWO));
+                tree[currentPosition].sqSum = tree[currentPosition].sqSum
+                        .add(elementBigInt.multiply(elementBigInt).multiply(highLowDiffBigInt));
+                tree[currentPosition].sqSum = tree[currentPosition].sqSum
+                        .add(tree[currentPosition].sum.multiply(elementBigInt).multiply(TWO));
                 tree[currentPosition].sum = tree[currentPosition].sum.add(elementBigInt.multiply(highLowDiffBigInt));
             } else if (type == 0) {
                 // Update by value.
                 tree[currentPosition] = new TreeNode();
-                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(elementBigInt.multiply(elementBigInt).multiply(highLowDiffBigInt));
+                tree[currentPosition].sqSum = tree[currentPosition].sqSum
+                        .add(elementBigInt.multiply(elementBigInt).multiply(highLowDiffBigInt));
                 tree[currentPosition].sum = tree[currentPosition].sum.add(elementBigInt.multiply(highLowDiffBigInt));
             }
-            
+
             if (low != high) {
                 lazy[currentPosition * 2] = new LazyTreeNode();
                 lazy[currentPosition * 2].type = type;
@@ -217,23 +195,22 @@ class Main {
         tree[currentPosition].sqSum = tree[2 * currentPosition].sqSum.add(tree[2 * currentPosition + 1].sqSum);
     }
 
-    public static TreeNode query(
-        TreeNode [] tree, LazyTreeNode [] lazy,
-        int low, int high,
-        int startR, int endR, 
-        int currentPosition) 
-    {
-        BigInteger highLowDiffBigInt = BigInteger.valueOf(high - low + 1);    
+    public static TreeNode query(TreeNode[] tree, LazyTreeNode[] lazy, int low, int high, int startR, int endR,
+            int currentPosition) {
+        BigInteger highLowDiffBigInt = BigInteger.valueOf(high - low + 1);
         if (lazy[currentPosition] != null && lazy[currentPosition].type != -1) {
             // Update by increment
             if (lazy[currentPosition].type == 1) {
-            
+
                 BigInteger temp = lazy[currentPosition].value.multiply(tree[currentPosition].sum).multiply(TWO);
-                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(lazy[currentPosition].value.multiply(lazy[currentPosition].value).multiply(highLowDiffBigInt).add(temp));
-                tree[currentPosition].sum = tree[currentPosition].sum.add(lazy[currentPosition].value.multiply(highLowDiffBigInt));
+                tree[currentPosition].sqSum = tree[currentPosition].sqSum.add(lazy[currentPosition].value
+                        .multiply(lazy[currentPosition].value).multiply(highLowDiffBigInt).add(temp));
+                tree[currentPosition].sum = tree[currentPosition].sum
+                        .add(lazy[currentPosition].value.multiply(highLowDiffBigInt));
             } else if (lazy[currentPosition].type == 0) {
                 // Update by value.
-                tree[currentPosition].sqSum = lazy[currentPosition].value.multiply(lazy[currentPosition].value).multiply(highLowDiffBigInt);
+                tree[currentPosition].sqSum = lazy[currentPosition].value.multiply(lazy[currentPosition].value)
+                        .multiply(highLowDiffBigInt);
                 tree[currentPosition].sum = lazy[currentPosition].value.multiply(highLowDiffBigInt);
             }
 
@@ -249,9 +226,11 @@ class Main {
             lazy[currentPosition] = null;
         }
         // Fully outside
-        if (startR > high || endR < low) return new TreeNode();
+        if (startR > high || endR < low)
+            return new TreeNode();
         // Fully overlap
-        if (startR <= low && high <= endR) return tree[currentPosition];
+        if (startR <= low && high <= endR)
+            return tree[currentPosition];
 
         // Partially overlap
         int mid = (low + high) / 2;
@@ -267,12 +246,12 @@ class Main {
 class TreeNode {
     BigInteger sum;
     BigInteger sqSum;
-    
+
     public TreeNode() {
         this.sum = new BigInteger("0");
         this.sqSum = new BigInteger("0");
     }
-    
+
     @Override
     public String toString() {
         return this.sum + " " + this.sqSum;
@@ -282,7 +261,7 @@ class TreeNode {
 class LazyTreeNode {
     int type = -1;
     BigInteger value;
-    
+
     public LazyTreeNode() {
         this.value = new BigInteger("0");
     }

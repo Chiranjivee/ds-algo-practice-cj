@@ -3,91 +3,81 @@ import java.util.Arrays;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.BufferedReader; 
-import java.io.InputStreamReader; 
-import java.util.Scanner; 
-import java.util.StringTokenizer; 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-	static class FastReader { 
-        BufferedReader br; 
-        StringTokenizer st; 
-  
-        public FastReader() 
-        { 
-            br = new BufferedReader(new InputStreamReader(System.in)); 
-        } 
-  
-        String next() 
-        { 
-            while (st == null || !st.hasMoreElements()) 
-            { 
-                try
-                { 
-                    st = new StringTokenizer(br.readLine()); 
-                } 
-                catch (IOException  e) 
-                { 
-                    e.printStackTrace(); 
-                } 
-            } 
-            return st.nextToken(); 
-        } 
-  
-        int nextInt() 
-        { 
-            return Integer.parseInt(next()); 
-        } 
-  
-        long nextLong() 
-        { 
-            return Long.parseLong(next()); 
-        } 
-  
-        double nextDouble() 
-        { 
-            return Double.parseDouble(next()); 
-        } 
-  
-        String nextLine() 
-        { 
-            String str = ""; 
-            try
-            { 
-                str = br.readLine(); 
-            } 
-            catch (IOException e) 
-            { 
-                e.printStackTrace(); 
-            } 
-            return str; 
-        } 
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
+        String nextLine() {
+            String str = "";
+            try {
+                str = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return str;
+        }
     }
-	
-	public static void main(String[] args) throws IOException {
-		FastReader sc = new FastReader();
-      	int n = sc.nextInt();
-      	
-        int [] A = new int [n];
-        int [] B = new int [n];
-          
-      	TreeNode [] tree = new TreeNode[4 * n];
-      	for(int i = 0; i < tree.length; i++) tree[i] = new TreeNode();
-        for (int i = 0; i < n; i++) A[i] = sc.nextInt();
-        for (int i = 0; i < n; i++) B[i] = sc.nextInt();
+
+    public static void main(String[] args) throws IOException {
+        FastReader sc = new FastReader();
+        int n = sc.nextInt();
+
+        int[] A = new int[n];
+        int[] B = new int[n];
+
+        TreeNode[] tree = new TreeNode[4 * n];
+        for (int i = 0; i < tree.length; i++)
+            tree[i] = new TreeNode();
+        for (int i = 0; i < n; i++)
+            A[i] = sc.nextInt();
+        for (int i = 0; i < n; i++)
+            B[i] = sc.nextInt();
         buildTree(A, B, tree, 0, n - 1, 1);
-        
+
         int q = sc.nextInt();
-      	for (int i = 0; i < q; i++) {
-          	int l = sc.nextInt();
-          	int r = sc.nextInt();
+        for (int i = 0; i < q; i++) {
+            int l = sc.nextInt();
+            int r = sc.nextInt();
 
             TreeNode res = query(tree, 0, n - 1, l - 1, r - 1, 1);
             System.out.println(res.index + 1);
         }
-	}
+    }
 
-  	public static void buildTree(int[] A, int [] B, TreeNode [] tree, int start, int end, int treeNodeIdx) {
+    public static void buildTree(int[] A, int[] B, TreeNode[] tree, int start, int end, int treeNodeIdx) {
         if (start == end) {
             tree[treeNodeIdx].max = A[start];
             tree[treeNodeIdx].min = B[start];
@@ -134,7 +124,7 @@ public class Main {
         }
     }
 
-    public static TreeNode query(TreeNode [] tree, int start, int end, int left, int right, int treeNodeIdx) {
+    public static TreeNode query(TreeNode[] tree, int start, int end, int left, int right, int treeNodeIdx) {
         // Completely outside the given range.
         if (start > right || end < left) {
             return new TreeNode();
@@ -183,6 +173,7 @@ public class Main {
         return res;
     }
 }
+
 class TreeNode {
     long max = Integer.MIN_VALUE;
     long min = Integer.MAX_VALUE;
