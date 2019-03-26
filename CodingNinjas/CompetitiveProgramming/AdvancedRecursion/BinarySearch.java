@@ -1,6 +1,6 @@
 public class BinarySearch {
 
-	public static int binarySearch(int [] array, int start, int end, int key) {
+	public static int binarySearch(int[] array, int start, int end, int key) {
 		if (start > end) {
 			return -(start + 1);
 		}
@@ -11,9 +11,7 @@ public class BinarySearch {
 			return mid;
 		}
 
-		return array[mid] > key ? 
-			binarySearch(array, start, mid - 1, key):
-			binarySearch(array, mid + 1, end, key);
+		return array[mid] > key ? binarySearch(array, start, mid - 1, key) : binarySearch(array, mid + 1, end, key);
 	}
 
 	public static int binarySearchIterative(int[] array, int key) {
@@ -34,7 +32,7 @@ public class BinarySearch {
 	}
 
 	public static void main(String[] args) {
-		int [] arr = { 10, 20, 30, 40, 50 };
+		int[] arr = { 10, 20, 30, 40, 50 };
 		int idx = binarySearch(arr, 0, arr.length - 1, 23);
 		System.out.println(idx);
 		idx = binarySearchIterative(arr, 23);

@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Dominoes {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while (t-- > 0) {
@@ -16,8 +16,8 @@ public class Dominoes {
                 graph.addEdge(u - 1, v - 1);
             }
 
-            boolean [] visited = new boolean[n];
-            int [] depth = new int[n];
+            boolean[] visited = new boolean[n];
+            int[] depth = new int[n];
 
             Stack<Integer> st = new Stack<>();
             int count = 0;
@@ -27,18 +27,18 @@ public class Dominoes {
                     count++;
                 }
             }
-            
+
             System.out.println(Arrays.toString(depth));
             System.out.println(count);
         }
-	}
+    }
 }
 
 class Graph {
     int n;
     LinkedList<Integer>[] adjList;
 
-    public Graph (int n) {
+    public Graph(int n) {
         this.n = n;
         this.adjList = new LinkedList[n];
         for (int i = 0; i < n; i++) {
@@ -50,15 +50,15 @@ class Graph {
         this.adjList[u].add(v);
     }
 
-    public int dfs(boolean [] visited, int source, int[] depth) {
+    public int dfs(boolean[] visited, int source, int[] depth) {
         if (visited[source]) {
             return depth[source];
         }
 
         int currDepth = 1;
         visited[source] = true;
-        
-        for (Integer neighbour: this.adjList[source]) {
+
+        for (Integer neighbour : this.adjList[source]) {
             if (!visited[neighbour]) {
                 currDepth += dfs(visited, neighbour, depth);
             }

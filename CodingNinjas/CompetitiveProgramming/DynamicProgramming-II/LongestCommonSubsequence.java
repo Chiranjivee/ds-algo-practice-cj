@@ -1,5 +1,5 @@
 class LongestCommonSubsequence {
-    public static void main(String[] args){ 
+    public static void main(String[] args) {
         String s1 = "Tasty";
         String s2 = "Test";
 
@@ -26,7 +26,7 @@ class LongestCommonSubsequence {
     public static int lcsMemoised(String s1, String s2) {
         int m = s1.length();
         int n = s2.length();
-        int [][] dp = new int[m + 1][n + 1];
+        int[][] dp = new int[m + 1][n + 1];
         for (int i = 0; i < dp.length; i++) {
             for (int j = 0; j < dp[0].length; j++) {
                 dp[i][j] = -1;
@@ -37,8 +37,7 @@ class LongestCommonSubsequence {
         return result;
     }
 
-
-    public static int lcsMemoised(String s1, String s2, int m, int n, int [][] dp) {
+    public static int lcsMemoised(String s1, String s2, int m, int n, int[][] dp) {
         if (m == 0 || n == 0) {
             return 0;
         }
@@ -63,7 +62,7 @@ class LongestCommonSubsequence {
         int m = s1.length();
         int n = s2.length();
 
-        int [][] dp = new int[m + 1][n + 1];
+        int[][] dp = new int[m + 1][n + 1];
         for (int i = 0; i < dp.length; i++) {
             dp[i][0] = 0;
         }

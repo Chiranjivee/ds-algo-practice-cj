@@ -1,7 +1,7 @@
 import java.util.*;
 
 class StronglyConnectedComponents {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int n = 10;
         Graph graph = new Graph(n);
 
@@ -22,7 +22,7 @@ class StronglyConnectedComponents {
 
         graph.addEdge(8, 9);
 
-        boolean [] visited = new boolean[n];
+        boolean[] visited = new boolean[n];
 
         Stack<Integer> st = new Stack<>();
         for (int i = 0; i < n; i++) {
@@ -45,7 +45,7 @@ class Graph {
     int n;
     LinkedList<Integer>[] adjList;
 
-    public Graph (int n) {
+    public Graph(int n) {
         this.n = n;
         this.adjList = new LinkedList[n];
         for (int i = 0; i < n; i++) {
@@ -72,13 +72,13 @@ class Graph {
         this.adjList = transposedList;
     }
 
-    public void dfs(boolean [] visited, int source, Stack<Integer> st) {
+    public void dfs(boolean[] visited, int source, Stack<Integer> st) {
         if (visited[source]) {
             return;
         }
 
         visited[source] = true;
-        for (Integer neighbour: this.adjList[source]) {
+        for (Integer neighbour : this.adjList[source]) {
             if (!visited[neighbour]) {
                 dfs(visited, neighbour, st);
             }
@@ -87,13 +87,13 @@ class Graph {
         st.push(source);
     }
 
-    public void dfs(boolean [] visited, int source) {
+    public void dfs(boolean[] visited, int source) {
         if (visited[source]) {
             return;
         }
 
         visited[source] = true;
-        for (Integer neighbour: this.adjList[source]) {
+        for (Integer neighbour : this.adjList[source]) {
             if (!visited[neighbour]) {
                 dfs(visited, neighbour);
             }

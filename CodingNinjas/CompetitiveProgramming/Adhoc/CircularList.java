@@ -5,9 +5,9 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		int t = in.nextInt();
 		while (t-- > 0) {
-          	int i = in.nextInt();
-          	int p = in.nextInt();
-          	System.out.println((i + p) % 12);
-        }
+			int i = in.nextInt();
+			int p = in.nextInt();
+			System.out.println((i + p) % 12);
+		}
 	}
 }

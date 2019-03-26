@@ -76,7 +76,6 @@ public class RoyAndCoinBoxes {
         int lr = sc.nextInt();
         int[] arr = new int[n + 2];
         int[] count = new int[lr + 1];
-        
 
         for (int i = 0; i < lr; i++) {
             int l = sc.nextInt();

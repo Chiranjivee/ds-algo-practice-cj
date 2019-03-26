@@ -18,7 +18,8 @@ class Graph {
     }
 
     public void dfs(int s, boolean[] visited, List<Integer> path) {
-        if (visited[s]) return;
+        if (visited[s])
+            return;
         Stack<Integer> stack = new Stack<>();
         visited[s] = true;
         stack.push(s);
@@ -27,7 +28,8 @@ class Graph {
             s = stack.pop();
             path.add(s);
             for (int i = 0; i < V; i++) {
-                if (i == s) continue;
+                if (i == s)
+                    continue;
                 if (adjMat[s][i] == 1) {
                     if (!visited[i]) {
                         visited[i] = true;
@@ -40,20 +42,20 @@ class Graph {
 }
 
 public class solution {
-    public int solve(int n,int m,int U[],int V[]) {
+    public int solve(int n, int m, int U[], int V[]) {
         Graph graph = new Graph(n);
         for (int i = 0; i < m; i++) {
             graph.addEdge(U[i] - 1, V[i] - 1);
         }
-        boolean [] visited = new boolean [n];
+        boolean[] visited = new boolean[n];
         int count = 0;
         for (int i = 0; i < n; i++) {
             List<Integer> list = new ArrayList<>();
             graph.dfs(i, visited, list);
             if (list.size() != 0) {
-                count++;    
+                count++;
             }
         }
         return count;
-    }    
+    }
 }
