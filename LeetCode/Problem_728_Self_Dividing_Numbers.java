@@ -7,8 +7,10 @@ class Solution {
     }
 
     boolean dividingNumber(int num) {
-        for (int n = num; n > 0; n /= 10)
-            if (n % 10 == 0 || num % (n % 10) != 0) return false;
+        for (int n = num; n > 0; n /= 10) {
+            int digit = n % 10;
+            if (digit == 0 || num % (digit) != 0) return false;
+        }
         return true;
     }
 }
