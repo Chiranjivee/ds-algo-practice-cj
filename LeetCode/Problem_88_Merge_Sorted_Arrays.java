@@ -8,28 +8,18 @@
  */
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        if (n == 0) {
-            return;   
-        }
+        if (n == 0) return;   
 
         int num1Left = nums1.length - nums2.length - 1;
         int num2Left = nums2.length - 1;
-        if (m == 0) {
-            for (int i = nums1.length - 1; i >= 0; i--) {            
-                nums1[i] = nums2[num2Left--];
-            }
-            return;
-        }
         
-        
-        for (int i = nums1.length - 1; i >= 1; i--) {            
+        for (int i = nums1.length - 1; i >= 0; i--) {            
             if (num1Left < 0) {
                 nums1[i] = nums2[num2Left--];
             } else if (num2Left < 0)  {
                 nums1[i] = nums1[num1Left--];
             } else {
-                nums1[i] = Math.max(nums1[num1Left], nums2[num2Left]);    
-                
+                nums1[i] = Math.max(nums1[num1Left], nums2[num2Left]);
                 if (nums1[num1Left] > nums2[num2Left]) {
                     num1Left--;
                 } else {
@@ -37,6 +27,5 @@ class Solution {
                 }
             }
         }
-        nums1[0] = Math.min(nums1[0], nums2[0]);
     }
 }
