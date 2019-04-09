@@ -1,101 +1,57 @@
-public class solution {
-    public static int func(String[] arr, int n, int l, int[] visited, int[] dp) {
-        int set = 0;
-        int mask = 0;
-        for (int i = 0; i < n; i++) {
-            set += visited[i];
-            if (visited[i] == 1) {
-                mask += (int) Math.pow(2, i);
-            }
-        }
+import java.util.Arrays;
+import java.util.Scanner;
 
-        if (set == 0) {
-            return Integer.MAX_VALUE;
-        }
+public class Dilema {
 
-        if (set == 1) {
-            return 0;
-        }
-
-        if (dp[mask] != -1) {
-            return dp[mask];
-        }
-
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < l; i++) {
-            int first[] = new int[n];
-            int second[] = new int[n];
-            int cnt1 = 0;
-            int cnt2 = 0;
-
-            for (int k = 0; k < n; k++) {
-                if (visited[k] == 1 && arr[k].charAt(i) == '1') {
-                    first[k] = 1;
-                    cnt1++;
-                }
-
-                else if (visited[k] == 1 && arr[k].charAt(i) == '0') {
-                    second[k] = 1;
-                    cnt2++;
-                }
-            }
-
-            if (cnt1 == set || cnt2 == set) {
-                continue;
-            }
-
-            for (int k = 0; k < n; k++) {
-                if (first[k] == 1) {
-                    visited[k] = 0;
-                }
-            }
-
-            int c1 = func(arr, n, l, visited, dp);
-            for (int k = 0; k < n; k++) {
-                if (first[k] == 1) {
-                    visited[k] = 1;
-                }
-            }
-
-            for (int k = 0; k < n; k++) {
-                if (second[k] == 1) {
-                    visited[k] = 0;
-                }
-            }
-
-            int c2 = func(arr, n, l, visited, dp);
-            for (int k = 0; k < n; k++) {
-                if (second[k] == 1) {
-                    visited[k] = 1;
-                }
-            }
-
-            if (c1 == Integer.MAX_VALUE || c2 == Integer.MAX_VALUE) { }
-            else {
-                min = Math.min(min, c1 + c2);
-            }
-        }
-
-        if (min != Integer.MAX_VALUE) {
-            min += set;
-        }
-
-        return dp[mask] = min;
-
+    public static int minimumTouchRequired(int n, String[] input) {
+        int[][] dp = new int[input[0].length()][(1 << (n + 1))];
+        for (int i = 0; i < input[0].length(); i++)
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
+        return minimumTouchRequiredUtil(n, input, input[0].length() - 1, (1 << n) - 1, dp);
     }
 
-    public static int minimumTouchRequired(int n, String[] arr) {
-        int l = arr[0].length();
-        int visited[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            visited[i] = 1;
-        }
+    private static boolean isPowerOfTwo(int n) {
+        return (n & (n - 1)) == 0;
+    }
 
-        int dp[] = new int[(int) Math.pow(2, n)];
-        for (int j = 0; j < (int) Math.pow(2, n); j++) {
-            dp[j] = -1;
-        }
+    private static int minimumTouchRequiredUtil(int n, String[] input, int currentIdx, int mask, int[][] dp) {
+        if (isPowerOfTwo(mask))
+            return 0;
+        if (currentIdx < 0)
+            return 10000;
+        if (dp[currentIdx][mask] != Integer.MAX_VALUE)
+            return dp[currentIdx][mask];
 
-        return func(arr, n, l, visited, dp);
+        int subMask1 = 0;
+        int subMask2 = 0;
+        int currentTouches = 0;
+
+        for (int i = 0; i < input.length; i++)
+            if ((mask & (1 << i)) != 0) {
+                currentTouches++;
+                if (input[i].charAt(currentIdx) == '0')
+                    subMask1 |= (1 << i);
+                else
+                    subMask2 |= (1 << i);
+            }
+
+        int option1 = minimumTouchRequiredUtil(n, input, currentIdx - 1, subMask1, dp);
+        int option2 = minimumTouchRequiredUtil(n, input, currentIdx - 1, subMask2, dp);
+
+        // Not touching at all.
+        int option3 = minimumTouchRequiredUtil(n, input, currentIdx - 1, mask, dp);
+
+        return dp[currentIdx][mask] = Math.min(option1 + option2 + currentTouches, option3);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String[] inp = new String[n];
+        for (int i = 0; i < n; i++)
+            inp[i] = in.next();
+
+        System.out.println(minimumTouchRequired(n, inp));
+        in.close();
     }
 }
