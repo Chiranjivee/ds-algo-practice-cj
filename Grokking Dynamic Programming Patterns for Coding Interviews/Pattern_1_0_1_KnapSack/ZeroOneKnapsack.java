@@ -3,19 +3,16 @@ class ZeroOneKnapsack {
     public int knapSackBottomUp(int[] profits, int[] weights, int capacity) {
         if (capacity <= 0 || profits.length == 0 || weights.length != profits.length)
             return 0;
-
         int n = profits.length;
         int[][] dp = new int[n][capacity + 1];
 
         // populate the capacity=0 columns, with '0' capacity we have '0' profit
-        for (int i = 0; i < n; i++)
-            dp[i][0] = 0;
+        for (int i = 0; i < n; i++) dp[i][0] = 0;
 
         // if we have only one weight, we will take it if it is not more than the
         // capacity
         for (int c = 0; c <= capacity; c++) {
-            if (weights[0] <= c)
-                dp[0][c] = profits[0];
+            if (weights[0] <= c) dp[0][c] = profits[0];
         }
 
         // process all sub-arrays for all the capacities
