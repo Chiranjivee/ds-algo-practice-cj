@@ -1,8 +1,7 @@
 class ZeroOneKnapsack {
 
     public int knapSackBottomUp(int[] profits, int[] weights, int capacity) {
-        if (capacity <= 0 || profits.length == 0 || weights.length != profits.length)
-            return 0;
+        if (capacity <= 0 || profits.length == 0 || weights.length != profits.length) return 0;
         int n = profits.length;
         int[][] dp = new int[n][capacity + 1];
 
