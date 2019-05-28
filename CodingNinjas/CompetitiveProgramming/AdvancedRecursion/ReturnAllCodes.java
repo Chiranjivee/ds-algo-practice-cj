@@ -2,7 +2,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ReturnAllCodes {
-
 	// Return a string array that contains all possible codes
 	public static String[] getCode(String input) {
 		// Write your code here
@@ -11,7 +10,6 @@ public class ReturnAllCodes {
 		String[] resArr = new String[res.size()];
 		resArr = res.toArray(resArr);
 		return resArr;
-
 	}
 
 	public static void getCodeUtil(String input, StringBuilder temp, List<String> res) {
@@ -39,5 +37,4 @@ public class ReturnAllCodes {
 	public static char getChar(int x) {
 		return (char) (96 + x);
 	}
-
 }
