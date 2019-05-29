@@ -3,6 +3,14 @@ import java.util.ArrayList;
 
 public class ReturnAllCodes {
 	// Return a string array that contains all possible codes
+
+	public static void main(String[] args) {
+		String [] result = getCode("101");
+		for (String temp : result) {
+			System.out.println(temp);
+		}
+	}
+
 	public static String[] getCode(String input) {
 		// Write your code here
 		List<String> res = new ArrayList<>();
@@ -19,10 +27,12 @@ public class ReturnAllCodes {
 		}
 
 		int oneDigit = Character.getNumericValue(input.charAt(0));
-		temp.append(getChar(oneDigit));
-		getCodeUtil(input.substring(1), temp, res);
-		temp.setLength(temp.length() - 1);
-
+		if (oneDigit != 0) {
+			temp.append(getChar(oneDigit));
+			getCodeUtil(input.substring(1), temp, res);
+			temp.setLength(temp.length() - 1);
+		} else return;
+		
 		if (input.length() >= 2) {
 			int twoDigit = 10 * oneDigit + Character.getNumericValue(input.charAt(1));
 			if (twoDigit > 26) {
