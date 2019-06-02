@@ -36,12 +36,10 @@ class StackUsingQueues {
     }
 
     public static void main(String[] args) {
-
         StackUsingQueues stack = new StackUsingQueues();
         stack.push(2);
         stack.push(3);
         int top = stack.pop();
         System.out.println(top);
-
     }
 }
