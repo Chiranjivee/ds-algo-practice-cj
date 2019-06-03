@@ -9,8 +9,10 @@ class Solution {
 
     int cap(char[][] b, int x, int y, int dx, int dy) {
         while (x >= 0 && x < b.length && y >= 0 && y < b[x].length && b[x][y] != 'B') {
-            if (b[x][y] == 'p')
+            if (b[x][y] == 'p') {
                 return 1;
+            }
+
             x += dx;
             y += dy;
         }
