@@ -40,5 +40,6 @@ class Solution {
 				return flattentail(next);
 			}
             return childtail; // CASE 4
-    	}	 
+        }	
+    } 
 }
