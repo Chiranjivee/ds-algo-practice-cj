@@ -3,7 +3,8 @@ class Solution {
         if (M.length == 0)
             return 0;
         int ones = 0;
-        //horizontal
+
+        // horizontal
         for (int i = 0; i < M.length; i++) {
             int count = 0;
             for (int j = 0; j < M[0].length; j++) {
@@ -14,7 +15,8 @@ class Solution {
                     count = 0;
             }
         }
-        //vertical
+
+        // vertical
         for (int i = 0; i < M[0].length; i++) {
             int count = 0;
             for (int j = 0; j < M.length; j++) {
@@ -25,7 +27,8 @@ class Solution {
                     count = 0;
             }
         }
-        //upper diagonal
+
+        // upper diagonal
         for (int i = 0; i < M[0].length || i < M.length; i++) {
             int count = 0;
             for (int x = 0, y = i; x < M.length && y < M[0].length; x++, y++) {
@@ -36,7 +39,8 @@ class Solution {
                     count = 0;
             }
         }
-        //lower diagonal
+
+        // lower diagonal
         for (int i = 0; i < M[0].length || i < M.length; i++) {
             int count = 0;
             for (int x = i, y = 0; x < M.length && y < M[0].length; x++, y++) {
@@ -47,7 +51,8 @@ class Solution {
                     count = 0;
             }
         }
-        //upper anti-diagonal
+
+        // upper anti-diagonal
         for (int i = 0; i < M[0].length || i < M.length; i++) {
             int count = 0;
             for (int x = 0, y = M[0].length - i - 1; x < M.length && y >= 0; x++, y--) {
@@ -58,11 +63,11 @@ class Solution {
                     count = 0;
             }
         }
-        //lower anti-diagonal
+
+        // lower anti-diagonal
         for (int i = 0; i < M[0].length || i < M.length; i++) {
             int count = 0;
             for (int x = i, y = M[0].length - 1; x < M.length && y >= 0; x++, y--) {
-                //System.out.println(x+" "+y);
                 if (M[x][y] == 1) {
                     count++;
                     ones = Math.max(ones, count);
