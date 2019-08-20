@@ -11,7 +11,7 @@ class SnapshotArray {
     int snap_id = 0;
     Map<Integer,Integer> currMap = new HashMap<>();
     public SnapshotArray(int length) {}
-    
+
     public void set(int index, int val) {
         currMap.put(index,val);
     }
