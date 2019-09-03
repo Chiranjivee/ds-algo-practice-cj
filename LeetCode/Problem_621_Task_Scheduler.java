@@ -8,6 +8,7 @@ class Solution {
         for (int i = 24; i >= 0 && map[i] > 0; i--) {
             idle_slots -= Math.min(map[i], max_val);
         }
+        
         return idle_slots > 0 ? idle_slots + tasks.length : tasks.length;
     }
 }
