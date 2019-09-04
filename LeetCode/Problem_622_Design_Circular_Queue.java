@@ -28,7 +28,8 @@ class MyCircularQueue {
             front = (front + 1) % a.length;
             len--;
             return true;
-        } else return false;
+        } 
+        else return false;
     }
 
     public int Front() {
