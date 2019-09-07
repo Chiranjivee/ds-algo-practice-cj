@@ -13,6 +13,7 @@ class Solution {
             if (n == 0) {
                 break;
             }
+            
             if (flowerbed[i] == 1) {
                 continue;
             }
