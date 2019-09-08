@@ -5,15 +5,16 @@ class Solution {
         }
 
         if (flowerbed.length == 1) {
-            if (flowerbed[0] == 0 && n == 1)
+            if (flowerbed[0] == 0 && n == 1) {
                 return true;
+            }
         }
 
         for (int i = 0; i < flowerbed.length; i++) {
             if (n == 0) {
                 break;
             }
-            
+
             if (flowerbed[i] == 1) {
                 continue;
             }
