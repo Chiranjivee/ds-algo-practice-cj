@@ -24,6 +24,7 @@ class Solution {
             else if (root.val == root.left.val - 1)
                 inr = l[0] + 1;
         }
+
         if (root.right != null) {
             int[] r = longestPath(root.right);
             if (root.val == root.right.val + 1)
