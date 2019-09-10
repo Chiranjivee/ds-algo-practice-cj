@@ -7,7 +7,7 @@ class Solution {
         for(int num : nums){
             if(set.contains(num)){
                 repeat.add(num);
-            }else{
+            } else{
                 set.add(num);
             }
         }
