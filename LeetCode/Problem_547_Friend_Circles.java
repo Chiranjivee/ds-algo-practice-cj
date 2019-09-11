@@ -24,8 +24,7 @@ class Solution {
 
         int count = 0;
         for (int i = 0; i < parent.length; i++) {
-            if (parent[i] == -1)
-                count++;
+            if (parent[i] == -1) count++;
         }
         return count;
     }
