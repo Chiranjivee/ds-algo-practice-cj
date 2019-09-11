@@ -8,8 +8,7 @@ class Solution {
     void union(int parent[], int x, int y) {
         int xset = find(parent, x);
         int yset = find(parent, y);
-        if (xset != yset)
-            parent[xset] = yset;
+        if (xset != yset) parent[xset] = yset;
     }
     
     public int findCircleNum(int[][] M) {
