@@ -20,6 +20,7 @@ public class Solution {
                 y += dir[1];
                 count++;
             }
+
             if (distance[start[0]][start[1]] + count < distance[x - dir[0]][y - dir[1]]) {
                 distance[x - dir[0]][y - dir[1]] = distance[start[0]][start[1]] + count;
                 dfs(maze, new int[]{x - dir[0],y - dir[1]}, distance);
