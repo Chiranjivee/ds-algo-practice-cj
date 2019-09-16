@@ -60,6 +60,7 @@ class Solution {
                     String num = s.substring(l, r);
                     curr.add(new NestedInteger(Integer.valueOf(num)));
                 }
+
                 l = r+1;
             }
         }
