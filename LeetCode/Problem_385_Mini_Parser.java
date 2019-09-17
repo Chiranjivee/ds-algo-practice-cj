@@ -43,6 +43,7 @@ class Solution {
                 if (curr != null) {
                     stack.push(curr);
                 }
+
                 curr = new NestedInteger();
                 l = r+1;
             } else if (ch == ']') {
