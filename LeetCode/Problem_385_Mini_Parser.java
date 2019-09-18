@@ -41,6 +41,7 @@ class Solution {
             char ch = s.charAt(r);
             if (ch == '[') {
                 if (curr != null) {
+
                     stack.push(curr);
                 }
 
