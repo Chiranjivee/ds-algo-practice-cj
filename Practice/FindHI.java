@@ -12,6 +12,7 @@ class FindHI {
     }
 
     static int countHiRecursive(String s, int i, int lastCharIdx, int count, boolean seenXBeforeH) {
+
         int thisCount = 0;
 
         if (i >= s.length()) return count;
