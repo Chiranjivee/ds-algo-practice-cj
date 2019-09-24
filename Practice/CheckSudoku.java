@@ -11,6 +11,7 @@ class CheckSudoku {
             for (int j = 0; j < 9; j++) {
                 set.add(sudoku[i][j]);
             }
+
             if (set.size() != 9) return false;
             set.clear();
         }
