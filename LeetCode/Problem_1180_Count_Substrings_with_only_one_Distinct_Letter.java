@@ -12,6 +12,7 @@ class Solution {
 
             res += j;
         }
+        
         return res;
     }
 }
