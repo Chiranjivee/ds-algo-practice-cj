@@ -12,7 +12,9 @@ class Solution {
             set.add(String.valueOf(Arrays.copyOf(chars, i)));
         }
         
-        if (i == chars.length) return;
+        if (i == chars.length) {
+            return;
+        }
 
         for (int j = i; j < chars.length; j++) {
             swap(chars, i, j);
