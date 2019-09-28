@@ -24,6 +24,7 @@ class Solution {
     }
 
     private void swap(char[] chars, int i, int j) {
+        
         char temp = chars[i];
         chars[i] = chars[j];
         chars[j] = temp;
