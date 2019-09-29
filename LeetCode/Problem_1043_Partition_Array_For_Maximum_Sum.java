@@ -8,6 +8,7 @@ class Solution {
                 dp[i] = Math.max(dp[i], (i >= k ? dp[i - k] : 0) + curMax * k);
             }
         }
+        
         return dp[N - 1];
     }
 }
