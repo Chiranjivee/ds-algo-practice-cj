@@ -29,6 +29,7 @@ class Solution {
             if (res[i] < res[st.peek()]) {
                 st.push(i++);
             } else {
+                
                 while (!st.isEmpty() && res[st.peek()] < res[i]) {
                     System.out.println("Peek:" + st.peek() + ", res[i]:" + res[i]);
                     res[st.pop()] = res[i];
