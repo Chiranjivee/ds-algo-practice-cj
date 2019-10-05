@@ -30,6 +30,7 @@ class Solution {
             if (currentDayWeight + weights[i] <= maxWeight) {
                 currentDayWeight += weights[i];
             } else {
+                
                 currentDayWeight = 0;
                 res++;
                 if (weights[i] > maxWeight) {
