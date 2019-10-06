@@ -9,8 +9,10 @@ class Solution {
     }
 
     public int mincostTickets(int[] days, int[] costs) {
-        if (days.length == 0)
+        if (days.length == 0) {
             return 0;
+        }
+
         int[] dp = new int[days.length];
         Arrays.fill(dp, -1);
         System.out.println(mincostTicketBottomUp(days, costs));
