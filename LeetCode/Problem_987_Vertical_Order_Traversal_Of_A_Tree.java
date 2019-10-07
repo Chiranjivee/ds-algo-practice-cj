@@ -28,10 +28,12 @@ class Solution {
         }
         
         if (map.containsKey(leftOrRight)) {
+
             PriorityQueue<Node> myQueue = map.get(leftOrRight);
             myQueue.add(new Node(root.val, level));
             map.put(leftOrRight, myQueue);
         } else {
+
             PriorityQueue<Node> myQueue = new PriorityQueue<>(11, (a, b) -> {
                 if (a.level == b.level) {
                     return a.val - b.val;
