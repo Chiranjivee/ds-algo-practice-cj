@@ -6,11 +6,12 @@ class Solution {
         for (int subset = 1; subset < (1<<N); ++subset) {
             int[] rec = new int[]{0, 0, 1_000_000_000, 1_000_000_000};
             int parity = -1;
-            for (int bit = 0; bit < N; ++bit)
+            for (int bit = 0; bit < N; ++bit) {
                 if (((subset >> bit) & 1) != 0) {
                     rec = intersect(rec, rectangles[bit]);
                     parity *= -1;
                 }
+            }
             ans += parity * area(rec);
         }
 
