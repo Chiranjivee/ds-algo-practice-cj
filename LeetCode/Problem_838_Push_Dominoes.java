@@ -7,11 +7,12 @@ class Solution {
         indexes[0] = -1;
         symbols[0] = 'L';
 
-        for (int i = 0; i < N; ++i)
+        for (int i = 0; i < N; ++i) {
             if (dominoes.charAt(i) != '.') {
                 indexes[len] = i;
                 symbols[len++] = dominoes.charAt(i);
             }
+        }
 
         indexes[len] = N;
         symbols[len++] = 'R';
