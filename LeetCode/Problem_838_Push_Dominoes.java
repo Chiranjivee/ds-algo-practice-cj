@@ -26,8 +26,9 @@ class Solution {
                 for (int k = i+1; k < j; ++k)
                     ans[k] = x;
             } else if (x > y) { // RL
-                for (int k = i+1; k < j; ++k)
+                for (int k = i+1; k < j; ++k) {
                     ans[k] = k-i == j-k ? '.' : k-i < j-k ? 'R' : 'L';
+                }
             }
         }
 
