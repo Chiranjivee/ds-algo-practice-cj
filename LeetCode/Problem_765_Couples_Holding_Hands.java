@@ -21,8 +21,9 @@ class Solution {
         // For each couch (1 indexed)
         for (int r = 1; r <= N; ++r) {
             // If this couch has no people needing to be paired, continue
-            if (adj[r][0] == 0 && adj[r][1] == 0)
+            if (adj[r][0] == 0 && adj[r][1] == 0) {
                 continue;
+            }
 
             // Otherwise, there is a cycle starting at couch r.
             // We will use two pointers x, y with y faster than x by one turn.
