@@ -1,7 +1,9 @@
 class Solution {
     public int openLock(String[] deadends, String target) {
         Set<String> dead = new HashSet();
-        for (String d: deadends) dead.add(d);
+        for (String d: deadends) {
+            dead.add(d);
+        }
 
         Queue<String> queue = new LinkedList();
         queue.offer("0000");
