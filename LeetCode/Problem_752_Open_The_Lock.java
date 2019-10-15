@@ -13,6 +13,7 @@ class Solution {
         seen.add("0000");
 
         int depth = 0;
+
         while (!queue.isEmpty()) {
             String node = queue.poll();
             if (node == null) {
