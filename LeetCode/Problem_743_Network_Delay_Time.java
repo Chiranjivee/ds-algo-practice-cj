@@ -8,8 +8,9 @@ class Solution {
             graph.get(edge[0]).add(new int[]{edge[1], edge[2]});
         }
         dist = new HashMap();
-        for (int node = 1; node <= N; ++node)
+        for (int node = 1; node <= N; ++node) {
             dist.put(node, Integer.MAX_VALUE);
+        }
 
         dist.put(K, 0);
         boolean[] seen = new boolean[N+1];
