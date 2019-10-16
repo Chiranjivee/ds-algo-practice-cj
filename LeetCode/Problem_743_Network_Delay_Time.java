@@ -7,6 +7,7 @@ class Solution {
                 graph.put(edge[0], new ArrayList<int[]>());
             graph.get(edge[0]).add(new int[]{edge[1], edge[2]});
         }
+
         dist = new HashMap();
         for (int node = 1; node <= N; ++node) {
             dist.put(node, Integer.MAX_VALUE);
