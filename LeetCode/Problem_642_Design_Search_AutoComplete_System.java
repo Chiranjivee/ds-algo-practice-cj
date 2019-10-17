@@ -42,6 +42,7 @@ public class AutocompleteSystem {
         if (t.branches[26] != null)
             traverse(s + ' ', t.branches[26], list);
     }
+
     Trie root;
     public AutocompleteSystem(String[] sentences, int[] times) {
         root = new Trie();
@@ -49,6 +50,7 @@ public class AutocompleteSystem {
             insert(root, sentences[i], times[i]);
         }
     }
+
     String cur_sent = "";
     public List < String > input(char c) {
         List < String > res = new ArrayList < > ();
