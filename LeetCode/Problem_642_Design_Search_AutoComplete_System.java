@@ -4,6 +4,7 @@ public class AutocompleteSystem {
             sentence = st;
             times = t;
         }
+
         String sentence;
         int times;
     }
