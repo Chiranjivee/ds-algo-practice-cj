@@ -20,10 +20,13 @@ public class AutocompleteSystem {
 
     public void insert(Trie t, String s, int times) {
         for (int i = 0; i < s.length(); i++) {
-            if (t.branches[int_(s.charAt(i))] == null)
+            if (t.branches[int_(s.charAt(i))] == null) {
                 t.branches[int_(s.charAt(i))] = new Trie();
+            }
+
             t = t.branches[int_(s.charAt(i))];
         }
+
         t.times += times;
     }
 
