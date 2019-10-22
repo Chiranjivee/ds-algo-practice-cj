@@ -1,4 +1,3 @@
-
 public class StringIterator {
     String res;
     int ptr = 0, num = 0;
