@@ -7,8 +7,10 @@ public class StringIterator {
     }
     
     public char next() {
-        if (!hasNext())
+        if (!hasNext()) {
             return ' ';
+        }
+            
         if (num == 0) {
             ch = res.charAt(ptr++);
             while (ptr < res.length() && Character.isDigit(res.charAt(ptr))) {
