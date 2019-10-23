@@ -15,6 +15,7 @@ public class StringIterator {
                 num = num * 10 + res.charAt(ptr++) - '0';
             }
         }
+
         num--;
         return ch;
     }
