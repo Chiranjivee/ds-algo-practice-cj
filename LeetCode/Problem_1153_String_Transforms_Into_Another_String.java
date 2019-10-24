@@ -6,7 +6,8 @@ class Solution {
             if (dp.getOrDefault(s1.charAt(i), s2.charAt(i)) != s2.charAt(i))
                 return false;
             dp.put(s1.charAt(i), s2.charAt(i));
-        }
+        }        
+
         return new HashSet<Character>(dp.values()).size() < 26;
     }
 }
