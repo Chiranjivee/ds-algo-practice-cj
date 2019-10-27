@@ -1,6 +1,7 @@
 class Solution {
     public boolean canConvert(String s1, String s2) {
         if (s1.equals(s2)) {
+
             return true;
         }
 
