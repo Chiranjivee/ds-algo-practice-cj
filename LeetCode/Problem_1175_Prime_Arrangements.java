@@ -11,6 +11,7 @@ class Solution {
     }
 
     private int numOfPrime(int n) {
+
         boolean[] isPrime = new boolean[n + 1];
         Arrays.fill(isPrime, true);
         isPrime[0] = false;
