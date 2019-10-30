@@ -19,6 +19,7 @@ class Solution {
 
         int primesLeft = 0;
         for (int i = 2; i <= n; i++) {
+
             if (isPrime[i]) {
                 primesLeft++;
                 for (int j = i; j * i <= n; j++) {
