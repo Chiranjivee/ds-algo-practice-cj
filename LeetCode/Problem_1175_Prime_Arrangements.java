@@ -16,7 +16,6 @@ class Solution {
         Arrays.fill(isPrime, true);
         isPrime[0] = false;
         isPrime[1] = false;
-
         int primesLeft = 0;
         for (int i = 2; i <= n; i++) {
 
