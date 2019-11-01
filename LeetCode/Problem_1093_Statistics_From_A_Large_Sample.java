@@ -5,6 +5,7 @@ class Solution {
         double median = 0, min = -1, max = 0, avg = 0, sum = 0;
         for (int i = 0; i < 256; ++i) {
             if (count[i] > 0) {
+
                 total += count[i];
                 if (min < 0) min = i;
                 max = i;
