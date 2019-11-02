@@ -13,6 +13,7 @@ class CBTInserter {
     public CBTInserter(TreeNode root) {
         this.root = root;
         list.add(root);
+
         for (int i = 0; i < list.size(); ++i) {
             if (list.get(i).left != null) list.add(list.get(i).left);
             if (list.get(i).right != null) list.add(list.get(i).right);
