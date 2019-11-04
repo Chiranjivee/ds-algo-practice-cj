@@ -7,8 +7,10 @@ class Solution {
             for (int j = i; j < N; ++j) {
                 int match = 0;
                 for (int k = 0; k < 6; ++k)
-                    if (wordlist[i].charAt(k) == wordlist[j].charAt(k))
+                    if (wordlist[i].charAt(k) == wordlist[j].charAt(k)) {
                         match++;
+                    }
+
                 H[i][j] = H[j][i] = match;
             }
 
