@@ -25,7 +25,7 @@ class Solution {
                 this.getHeight(node.getRight());
         }
 
-        public Node rotateRight( Node node) {
+        public Node rotateRight(Node node) {
             Node prevLeft = node.getLeft();
             Node prevLeftRight = prevLeft.getRight();
 
