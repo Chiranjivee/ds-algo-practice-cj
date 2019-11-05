@@ -5,7 +5,6 @@ class Solution {
         H = new int[N][N];
         for (int i = 0; i < N; ++i)
             for (int j = i; j < N; ++j) {
-
                 int match = 0;
                 for (int k = 0; k < 6; ++k)
                     if (wordlist[i].charAt(k) == wordlist[j].charAt(k)) {
