@@ -9,6 +9,7 @@ class Solution {
                 if (!index.containsKey(p)) {
                 index.put(p, count++);
             }
+
             dsu.union(index.get(pair.get(0)), index.get(pair.get(1)));
         }
 
