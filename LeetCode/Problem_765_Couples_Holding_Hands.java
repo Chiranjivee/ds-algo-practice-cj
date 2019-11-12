@@ -62,6 +62,7 @@ class Solution {
             x = pair[1];
             pair[1] = 0;
         }
+
         return x;
     }
 }
