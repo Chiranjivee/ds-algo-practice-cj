@@ -56,6 +56,7 @@ class Solution {
     // Remove the next non-zero element from pair, replacing it with zero.
     public int pop(int[] pair) {
         int x = pair[0];
+
         if (x != 0) {
             pair[0] = 0;
         } else {
