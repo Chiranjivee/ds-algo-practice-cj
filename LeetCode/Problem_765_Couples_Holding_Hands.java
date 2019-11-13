@@ -40,6 +40,7 @@ class Solution {
                 y = pop(adj[y]);
             }
         }
+        
         return ans;
     }
 
