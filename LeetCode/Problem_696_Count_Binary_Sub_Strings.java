@@ -3,7 +3,6 @@ class Solution {
         int res = 0;
         int curr = 1;
         int pre = 0;
-        
         for (int i = 1; i < s.length(); i++) {
             if (s.charAt(i - 1) == s.charAt(i)) {
                 curr++;
