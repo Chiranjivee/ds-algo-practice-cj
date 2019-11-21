@@ -29,6 +29,19 @@ class CoinChangeProblem {
                 + countWaysNaiveRecursive(denominations, idx, N - denominations[idx]);
     }
 
+    public static int countWaysDP(int [] denominations, int N) {
+        int [] dp = new int [N + 1];
+
+        dp[0] = 1;
+        for (int coinValue : denominations) {
+            for (int j = coinValue; j <= N; j++) {
+                table[j] += table[j - coinValue];
+            }
+        }
+
+        return dp[N];
+    }
+
     public static void main(String[] args) {
         int [] denominations = {2, 3, 5};
         int N = 15;
