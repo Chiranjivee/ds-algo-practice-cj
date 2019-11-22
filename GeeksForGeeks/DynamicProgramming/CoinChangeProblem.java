@@ -20,7 +20,7 @@ class CoinChangeProblem {
             return 0;
         }
 
-        if (idx >= denominations.length && n >= 1) {
+        if (idx >= denominations.length && N >= 1) {
             return 0;
         }
 
@@ -35,7 +35,7 @@ class CoinChangeProblem {
         dp[0] = 1;
         for (int coinValue : denominations) {
             for (int j = coinValue; j <= N; j++) {
-                table[j] += table[j - coinValue];
+                dp[j] += dp[j - coinValue];
             }
         }
 
@@ -44,7 +44,7 @@ class CoinChangeProblem {
 
     public static void main(String[] args) {
         int [] denominations = {2, 3, 5};
-        int N = 15;
+        int N = 7;
         System.out.println(countWaysNaive(denominations, N));
     }
 }
