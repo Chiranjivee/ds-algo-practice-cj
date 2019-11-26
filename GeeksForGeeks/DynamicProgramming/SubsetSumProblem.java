@@ -55,10 +55,36 @@ class SubsetProblem {
                     isSubSetSum(set, idx + 1, target));
     }
 
+    public boolean isSubSetSumBottomUpDP(int [] set, int target) {
 
+        boolean [][] dp = new boolean[set.length + 1][target + 1];
+
+        // 0 sum is always possible
+        for (int i = 0; i <= set.length; i++) {
+            dp[i][0] = true;
+        }
+
+        // for empty set no sum is possible
+        for (int i = 1; i <= target; i++) {
+            dp[0][i] = false;
+        }
+
+        for (int elementIdx = 1; elementIdx <= set.length; i++) {
+            for (int currentSum = 1; currentSum <= target; currentSum++) {
+                if (currentSum > set[elementIdx - 1]) {
+                    dp[elementIdx][currentSum] = dp[elementIdx - 1][currentSum];
+                } else {
+                    dp[elementIdx][currentSum] = 
+                        dp[elementIdx - 1][currentSum]                                  // exclude element
+                            || dp[elementIdx - 1][currentSum - set[elementIdx - 1]]     // include element
+                }
+            }
+        }
+        
+        return dp[set.length][target];
+    }
 
     public static void main(String[] args) {
         SubsetProblem subsetProblem = new SubsetProblem();
-
     }
 }
