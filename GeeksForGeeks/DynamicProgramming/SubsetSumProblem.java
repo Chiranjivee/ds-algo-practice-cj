@@ -69,11 +69,12 @@ class SubsetProblem {
             dp[0][i] = false;
         }
 
-        for (int elementIdx = 1; elementIdx <= set.length; i++) {
+        for (int elementIdx = 1; elementIdx <= set.length; elementIdx++) {
             for (int currentSum = 1; currentSum <= target; currentSum++) {
                 if (currentSum > set[elementIdx - 1]) {
                     dp[elementIdx][currentSum] = dp[elementIdx - 1][currentSum];
-                } else {
+                } 
+                if (currentSum >= set[elementIdx - 1]) {
                     dp[elementIdx][currentSum] = 
                         dp[elementIdx - 1][currentSum]                                  // exclude element
                             || dp[elementIdx - 1][currentSum - set[elementIdx - 1]]     // include element
@@ -91,10 +92,10 @@ class SubsetProblem {
         int elementIdx = 0;
         for (; elementIdx <= set.length; elementIdx++) {
             for (int currentSum = 0; currentSum <= target; currentSum++) {
-                if (elementIdx == 0) {
-                    dp[elementIdx][currentSum] = false;
-                } else if (currentSum == 0) {
+                if (currentSum == 0) {
                     dp[elementIdx % 2][currentSum] = true;
+                } else if (elementIdx == 0) {
+                    dp[elementIdx][currentSum] = false;
                 } else if (currentSum < set[elementIdx - 1]) {
                     dp[elementIdx % 2][currentSum] = dp[(elementIdx + 1) % 2][currentSum];
                 } else {
