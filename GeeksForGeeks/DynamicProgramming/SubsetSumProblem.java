@@ -80,11 +80,31 @@ class SubsetProblem {
                 }
             }
         }
-        
+
         return dp[set.length][target];
     }
 
-    public static void main(String[] args) {
-        SubsetProblem subsetProblem = new SubsetProblem();
+    public boolean isSubSetBottomUpSpaceOptimized(int [] set, int target) {
+
+        boolean [][] dp = new boolean[2][target + 1];
+
+        int elementIdx = 0;
+        for (; elementIdx <= set.length; elementIdx++) {
+            for (int currentSum = 0; currentSum <= target; currentSum++) {
+                if (elementIdx == 0) {
+                    dp[elementIdx][currentSum] = false;
+                } else if (currentSum == 0) {
+                    dp[elementIdx % 2][currentSum] = true;
+                } else if (currentSum < set[elementIdx - 1]) {
+                    dp[elementIdx % 2][currentSum] = dp[(elementIdx + 1) % 2][currentSum];
+                } else {
+                    dp[elementIdx % 2][currentSum] =
+                        dp[(elementIdx + 1) % 2][currentSum] ||
+                        dp[(elementIdx + 1) % 2][currentSum - set[elementIdx - 1]];
+                }
+            }
+        }
+
+        return dp[set.length % 2][target];
     }
 }
