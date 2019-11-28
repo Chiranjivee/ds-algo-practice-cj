@@ -24,6 +24,8 @@ class LargestDivisiblePairSubset {
     public static void main(String[] args) {
         int [] input = new int [] {18, 1, 3, 6, 13, 17};
         Arrays.sort(input);
-
+        LargestDivisiblePairSubset sol = new LargestDivisiblePairSubset();
+        int res = sol.solveLargestDivisiblePairSubsetProblem(input);
+        System.out.println(res);
     }
 }
