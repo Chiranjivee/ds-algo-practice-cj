@@ -17,7 +17,6 @@ public class BinomialCoefficients {
     }
 
     public static void main(String[] args) {
-
         System.out.println("Naive way of C(5, 2): " + naiveBinomialCoeficient(5, 2));
     }
 }

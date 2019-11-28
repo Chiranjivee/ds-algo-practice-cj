@@ -24,7 +24,6 @@ class BellNumbers {
         return bellTriangle[n][n];
     }
 
-
     public static void main(String[] args) {
         
         System.out.println(BellNumbers.bellNumber(5));
