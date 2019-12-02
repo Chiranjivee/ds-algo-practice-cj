@@ -30,7 +30,20 @@ class ChoiceOfArea {
 
     public static void main(String[] args) {
         Map<Tuple, Integer> memo = new HashMap<>();
-
+        ChoiceOfArea coa = new ChoiceOfArea();
+        Area one = new Area()(3, 2); 
+        Area two = new Area()(-5, -10); 
+        Area three = new Area()(-20, 5); 
+  
+        int powerA = 20; 
+        int powerB = 8; 
+        
+        int optionOne = coa.getMaxSurvivalTime(powerA, powerB, one, two, three, one, memo);
+        int optionTwo = coa.getMaxSurvivalTime(powerA, powerB, one, two, three, two, memo);
+        int optionThree = coa.getMaxSurvivalTime(powerA, powerB, one, two, three, three, memo);
+        
+        int result = Math.max(optionOne, Math.max(optionTwo, optionThree));
+        System.out.println("Result: " + result);
     }
 }
 
