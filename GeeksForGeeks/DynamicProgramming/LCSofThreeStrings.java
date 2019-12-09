@@ -1,5 +1,4 @@
-class LCSofThreeStrings {
-    
+class LCSofThreeStrings {    
     int lcs(String one, String two, String three) {
 
         int [][][] dp = new int[one.length() + 1][two.length() + 1][three.length() + 1];
