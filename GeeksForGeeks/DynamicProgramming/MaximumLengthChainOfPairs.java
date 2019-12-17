@@ -20,6 +20,27 @@ class MaximumLengthChainOfPairs {
 
         return max;
     }
+
+    public void printMaximumLengthChainOfPairs(Pair [] arr) {
+        int [] dp = new int[arr.length + 1];
+        Arrays.fill(dp, 1);
+        List<List<Pair>> pairs = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            pairs.add(new ArrayList<>());
+            pairs.get(i).append(arr[i]);
+        }
+
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[i].a > arr[j].b && dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
+                    pairs.set(i) = pairs.get(j).append(arr[i]);
+                }
+            }
+        }
+
+        print(pairs);
+    }
 }
 
 class Pair {
