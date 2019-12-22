@@ -15,7 +15,6 @@ class MaximumSumSuchThatNoTwoElementsAreAdjacent {
         return dp[arr.length - 1];
     }
 
-
     public int getMaxWithConstantSpace(int [] arr) {
         
         if (arr.length == 0) {
