@@ -2,14 +2,14 @@ import java.utils.Arrays;
 
 class MinimumRemovalOfElementsFromArrayToMakeMaxMinusMinLessThanEqualToK {
 
-    public int solve(int [] arr) {
+    public int solve(int [] arr, int k) {
         Arrays.sort(arr);
         int n = arr.length;
         int [][] dp = new int[n][n];
-        return solveDP(arr, 0, n - 1, dp);
+        return solveDP(arr, 0, n - 1, dp, k);
     }
 
-    public int solveDP(int [] arr, int i, int j, int [][] dp) {
+    public int solveDP(int [] arr, int i, int j, int [][] dp, int k) {
         if (i >= j) {
             return 0;
         }
