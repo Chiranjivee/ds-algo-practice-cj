@@ -15,4 +15,8 @@ class FloorTilingNByM {
 
         return dp[n];
     }
+
+    public int tileFloorNBy4(int n) {
+        return tileFloor(n, 4);
+    }
 }
