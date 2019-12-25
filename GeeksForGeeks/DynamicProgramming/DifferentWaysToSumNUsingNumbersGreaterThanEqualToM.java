@@ -8,6 +8,6 @@ class SummationWays {
             }
         }
 
-        return dp;
+        return dp[n];
     }
 }
