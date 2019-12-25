@@ -7,7 +7,7 @@ class NumberOfSolsOfLinearEquationOfNVariables {
 
         for (int x : coeff) {
             for (int i = x; i <= rhs; i++) {
-                dp[i] += dp[i - x]; 
+                dp[i] += dp[i - x];
             }
         }
 
