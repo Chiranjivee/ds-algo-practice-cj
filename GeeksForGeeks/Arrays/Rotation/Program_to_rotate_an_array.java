@@ -6,6 +6,17 @@ class Solution {
         System.out.println(Arrays.toString(rotateArrayByK(input, 2)));
     }
 
+    public static void rotateArray(int [] arr, int k) {
+        int n = arr.length;
+        int backup = arr[0];
+        int i = 0;
+        while (n-- > 0) {
+            arr[i++] = arr[k++ % arr.length];
+        }
+
+        return arr;
+    }
+
     public static int [] rotateArrayByK(int [] array, int k) {
         int rotateBy = k % array.length;
         if (rotateBy == 0) {
