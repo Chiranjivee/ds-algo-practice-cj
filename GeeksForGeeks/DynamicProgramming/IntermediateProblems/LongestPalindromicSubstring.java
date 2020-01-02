@@ -11,6 +11,11 @@ class LongestPalindromicSubstring {
         for (int colIdx = 1; colIdx < str.length; colIdx++) {
             // keep going diagonally down
             while (rowIdx < str.length - 1) {
+                if (colIdx - rowIdx == 1 && str[rowIdx] == str[colIdx]) {
+                    dp[rowIdx][colIdx] = true;
+                    continue;
+                }
+
                 if (str[rowIdx] == str[colIdx] && dp[rowIdx + 1][colIdx - 1]) {
                     dp[rowIdx][colIdx] = true;
                 } else {
