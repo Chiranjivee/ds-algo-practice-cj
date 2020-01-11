@@ -1,8 +1,6 @@
 class SerachRowWiseAndColWiseMatrix {
     public int search(int [][] matrix, int fromRow, int toRow, int fromCol, int toCol, int key) {
 
-
-
         int i = fromRow + (toRow - fromRow) / 2;
         int j = fromCol + (toCol - fromCol) / 2;
 
