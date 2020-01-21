@@ -1,7 +1,7 @@
 class InsertionSort {
     public void sort(int [] arr) {
         if (arr.length == 0 || arr.length == 1) {
-            return
+            return;
         }
 
         for (int i = 2; i < arr.length; i++) {
