@@ -11,6 +11,7 @@ class InsertionSort {
                 arr[j + 1] = arr[j];
                 j--;
             }
+
             arr[j] = element;
         }
     }
