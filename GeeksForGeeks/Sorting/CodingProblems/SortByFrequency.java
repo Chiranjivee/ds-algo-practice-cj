@@ -29,17 +29,21 @@ class SortByFrequency {
    
             /* Else If previous element is not equal to current 
               so set the count to 1 */
-            else
+            else {
                 element[i].count = 1;
+            }
         }
    
         /* Now we have counts and first index for each element so now 
            sort on the basis of count and in case of tie use index 
            to sort.*/
-        stable_sort(element, element + n, mycomp2);
-        for (int i = n - 1, index = 0; i >= 0; i--)
-            if (element[i].count != -1)
-                for (int j = 0; j<element[i].count; j++)
+        mergeSort(element, element + n, mycomp2);
+        for (int i = n - 1, index = 0; i >= 0; i--) {
+            if (element[i].count != -1) {
+                for (int j = 0; j<element[i].count; j++) {
                     arr[index++] = element[i].val;
+                }
+            }
+        }
     }
 }
