@@ -3,8 +3,9 @@ class IsSubset {
         HashSet<Integer> hset = new HashSet<>();
 
         for (int i = 0; i<m; i++) {
-            if (!hset.contains(arr1[i]))
+            if (!hset.contains(arr1[i])) {
                 hset.add(arr1[i]);
+            }
         }
 
        for (int i = 0; i<n; i++) {
