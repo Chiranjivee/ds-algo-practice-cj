@@ -10,7 +10,7 @@ class NaivePatternSearching {
     
             /* For current index i, check for pattern  
               match */
-            for (j = 0; j<M; j++)
+            for (j = 0; j < M; j++)
                 if (txt.charAt(i + j) != pat.charAt(j))
                     break;
     
