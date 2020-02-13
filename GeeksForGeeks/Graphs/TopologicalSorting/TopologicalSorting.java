@@ -8,8 +8,9 @@ class TopologicalSorting {
         Iterator<Integer> it = adj[v].iterator();
         while (it.hasNext()) {
             i = it.next();
-            if (!visited[i])
+            if (!visited[i]) {
                 topologicalSortUtil(i, visited, stack);
+            }
         }
 
         // Push current vertex to stack which stores result 
