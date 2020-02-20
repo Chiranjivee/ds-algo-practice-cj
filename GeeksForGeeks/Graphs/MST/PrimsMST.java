@@ -3,7 +3,7 @@ import java.lang.*;
 import java.io.*;
 
 class MST {
-	// Number of vertices in the graph 
+
 	private static final int V = 5;
 
 	// A utility function to find the vertex with minimum key 
