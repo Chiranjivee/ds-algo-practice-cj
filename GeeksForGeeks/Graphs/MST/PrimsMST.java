@@ -7,7 +7,6 @@ class MST {
 	private static final int V = 5;
 
 	int minKey(int key[], Boolean mstSet[]) {
-		// Initialize min value 
 		int min = Integer.MAX_VALUE, min_index = -1;
 
 		for (int v = 0; v<V; v++)
