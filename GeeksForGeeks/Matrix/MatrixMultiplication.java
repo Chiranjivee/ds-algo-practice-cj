@@ -13,6 +13,7 @@ class MatrixMultiplication {
             }
         }
 
+        System.out.println("I am in a hurry");
         return res;
     }
 
