@@ -158,6 +158,7 @@ public class Prims {
 		e.addEdge(graph, 6, 7, 1);
 		e.addEdge(graph, 6, 8, 6);
 		e.addEdge(graph, 7, 8, 7);
+		e.addEdge(graph, 1, 4, 7);
 
 		// Method invoked 
 		e.prims_mst(graph);
