@@ -4,7 +4,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++){
             int currNum = nums[i];
             int itsIdx = Math.abs(currNum) - 1;
-            
+
             if (nums[itsIdx] < 0) {
                 result.add(Math.abs(currNum));
             } else {
