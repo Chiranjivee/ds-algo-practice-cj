@@ -10,6 +10,7 @@ class Solution {
                 }
             }
         }
+
         for (int l = Math.min(m, n); l > 0; --l)
             for (int i = 0; i < m - l + 1; ++i)
                 for (int j = 0; j < n - l + 1; ++j)
