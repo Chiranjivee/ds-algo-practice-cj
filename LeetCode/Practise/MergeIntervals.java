@@ -13,7 +13,6 @@ class Solution {
                 prev[1] = inter[1];
             }
         }
-
         return ret.toArray(new int[ret.size()][2]);
     }
 }
