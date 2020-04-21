@@ -8,7 +8,7 @@ class Solution {
                 }
             }
         }
-        
+
         return null;
     }
 }
