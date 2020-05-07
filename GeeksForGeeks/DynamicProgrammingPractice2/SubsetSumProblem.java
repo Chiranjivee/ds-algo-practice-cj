@@ -28,8 +28,11 @@ class SubsetSumProblem {
         return subset[sum][n];
     }
 
+    /**
+     * Given a set check if a subset with given sum s exist.
+     */
     static boolean isSubsetSum(int set[], int n, int sum) {
-        // Base Cases 
+        // All sets can have subsets with zero sum 
         if (sum == 0)
             return true;
         if (n == 0 && sum != 0)
