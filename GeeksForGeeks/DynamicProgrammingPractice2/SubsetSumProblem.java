@@ -20,8 +20,7 @@ class SubsetSumProblem {
             for (int j = 1; j<= n; j++) {
                 subset[i][j] = subset[i][j - 1];
                 if (i >= set[j - 1])
-                    subset[i][j] = subset[i][j] ||
-                    subset[i - set[j - 1]][j - 1];
+                    subset[i][j] = subset[i][j] || subset[i - set[j - 1]][j - 1];
             }
         }
 
