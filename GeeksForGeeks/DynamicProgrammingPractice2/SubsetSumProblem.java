@@ -1,8 +1,5 @@
 class SubsetSumProblem {
     static boolean isSubsetSum(int set[], int n, int sum) {
-        // The value of subset[i][j] will be 
-        // true if there is a subset of  
-        // set[0..j-1] with sum equal to i 
         boolean subset[][] = new boolean[sum + 1][n + 1];
 
         // If sum is 0, then answer is true 
