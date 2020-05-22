@@ -12,7 +12,7 @@ class LRUCache {
         if (item == null) {
             return -1;
         }
-        
+
         cacheList.remove(item);
         cacheList.addFirst(item);
         return item.value;
