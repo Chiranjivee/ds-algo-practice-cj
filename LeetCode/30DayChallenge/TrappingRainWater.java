@@ -16,7 +16,7 @@ class Solution {
                 right--;
             }
         }
-        
+
         return volume;
     }
 }
