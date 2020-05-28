@@ -3,7 +3,6 @@ class Solution {
         List<Boolean> list = new ArrayList<>();
         int max = 0;
         for (int candy : candies) {
-
             max = Math.max(candy, max);
         }
         
