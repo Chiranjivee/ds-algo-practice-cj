@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 class Solution {
     public static void main(String[] args) {
-       System.out.println(lengthOfLongestSubstring("ABCAAD");
+       System.out.println(lengthOfLongestSubstring("asdfasdf");
     }
 
     public int lengthOfLongestSubstring(String s) {
