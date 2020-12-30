@@ -1,0 +1,78 @@
+Design Discussion for ProjectName - LimitLess
+
+User
+ - Habits 
+ - Goals
+
+Year
+ - Days
+
+
+Relationships
+- User has multiple years.
+- User will have yearly Habits
+- For every Habits he will have a mapping if goal was achieved or not
+
+
+Mukesh
+ - 2019
+    - Running
+      - 1/1/2019 - Yes
+      - 2/1/2019 - No
+    - Coding
+      - 1/1/2019 - Yes
+      - 2/1/2019 - No
+    - Trading
+      - 1/1/2019 - Yes
+      - 2/1/2019 - No
+ - 2020
+    - Coding
+    - Trading
+
+users            
+- user_id                      1 Mukesh 2021
+- user_name                    2 CJ
+- start_date                         
+
+
+user_year_habit
+- uuid
+- user_id                           123-Mukesh-2019-Running
+- year_id                           124-Mukesh-2019
+- habit_id
+- start_date
+
+Habits
+- habit_id                              1 Coding
+- habit_name                            2 Dancing
+
+habit_trail
+ - date 
+ - is_done
+ - duration_spent
+ - parent_uuid
+
+ 1/1/2019       1   45m    123
+ 1/1/2019       0    0m    123
+ 2/1/2019       1   30m    123
+ 2/1/2019       0          123
+ 3/1/2019       1          123
+ 3/1/2019       0          123
+ 3/1/2019       1          124
+ 3/1/2019       0          124
+
+ queries:
+
+ 1 select * from user_year where user_id = 'mukesh';
+ 2 for a given year, fetch user habits;
+ 3 select * from habit_trail where parent_uuid = 123 and habit_id = coding;
+
+
+Define Goals
+
+- year
+- Habit name 
+- start_date
+- finish_date
+- target days = // wants to do something for these many days in time duration finish - start
+- current days
