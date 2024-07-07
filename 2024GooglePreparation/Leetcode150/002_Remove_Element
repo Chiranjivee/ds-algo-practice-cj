@@ -1,0 +1,41 @@
+/**
+ * Problem link - https://leetcode.com/problems/remove-element/description/?envType=study-plan-v2&envId=top-interview-150
+ * 
+ * Problem level - EASY
+ * Given array, remove all element occurance in place.
+ */
+class Solution {
+
+    /**
+     * Idea: scan from beginning and replace element at the end.
+     * keep counting occurances
+     */
+    public int removeElement(int[] nums, int val) {
+        int lastIdx = nums.length - 1;
+        int i = 0;
+        int count = 0;
+
+        while (i <= lastIdx) {
+            if (nums[i] == val) {
+                count++;
+                swap(nums, i, lastIdx);
+                lastIdx--;
+            }
+
+            if (nums[i] != val) {
+                i++;
+            }
+        }
+
+        // return remaining elements length
+        return nums.length - count;
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        int x = nums[i];
+        nums[i] = nums[j];
+        nums[j] = x;
+    }
+
+    public static void main(String[] args) {}
+}
